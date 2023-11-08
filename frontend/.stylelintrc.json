@@ -1,5 +1,9 @@
 {
-    "extends": ["stylelint-config-standard-vue", "stylelint-config-property-sort-order-smacss"],
+    "extends": [
+        "stylelint-config-standard-scss",
+        "stylelint-config-standard-vue",
+        "stylelint-config-property-sort-order-smacss"
+    ],
     "rules": {
         "selector-class-pattern": "^([a-z][a-z0-9]*)(-[a-z0-9]+)*((__([a-z][a-z0-9]*)(-[a-z0-9]+)*)?((_)([a-z][a-z0-9]*)(-[a-z0-9]+)*)?)$",
         "color-hex-length": "long",

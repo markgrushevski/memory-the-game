@@ -7,8 +7,8 @@
         "dev": "vite",
         "build": "vite build",
         "preview": "vite preview",
-        "lint:prettier": "npx prettier --write **/*.{vue,js,json,md,html}",
-        "lint:stylelint": "npx stylelint --fix **/*.{vue,css}",
+        "lint:prettier": "npx prettier --write **/*.{vue,js,json,md,html,css,scss}",
+        "lint:stylelint": "npx stylelint --fix **/*.{vue,css,scss}",
         "lint:eslint": "npx eslint --fix **/*.{vue,js}",
         "lint:all": "npm run lint:prettier && npm run lint:stylelint && npm run lint:eslint"
     },
@@ -25,8 +25,10 @@
         "eslint-plugin-vue": "^9.18.1",
         "postcss-html": "^1.5.0",
         "prettier": "^3.0.3",
+        "sass": "^1.69.5",
         "stylelint": "^15.11.0",
         "stylelint-config-property-sort-order-smacss": "^9.1.0",
+        "stylelint-config-standard-scss": "^11.1.0",
         "stylelint-config-standard-vue": "^1.0.0",
         "vite": "^4.5.0"
     }
