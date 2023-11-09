@@ -3,7 +3,7 @@ import { ref } from 'vue';
 
 const data = ref('no data');
 
-await fetch('https://django-api-eodw.onrender.com/api/items/?format=json')
+fetch('https://django-api-eodw.onrender.com/api/items/?format=json')
     .then((res) => res.json())
     .then((res) => {
         console.log(res);
@@ -25,7 +25,7 @@ await fetch('https://django-api-eodw.onrender.com/api/items/?format=json')
 </template>
 
 <style lang="scss">
-@import url('@ui/styles');
+@import url('./ui/styles.scss');
 
 div {
     color: palegreen;
