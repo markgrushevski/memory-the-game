@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "django-api"
+version = "0.1.0"
+description = ""
+authors = ["amrylnikov <amrylnikov@gmail.com>"]
+readme = "README.md"
+packages = [{include = "django_api"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.2.7"
+djangorestframework = "^3.14.0"
+python-dotenv = "^1.0.0"
+psycopg2-binary = "^2.9.9"
+dj-database-url = "^2.1.0"
+gunicorn = "^21.2.0"
+django-cors-headers = "^4.3.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
