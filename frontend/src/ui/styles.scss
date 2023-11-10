@@ -1,7 +1,10 @@
-body {
-    margin: 0;
-    background: darkgrey;
-    color: #1d1d1d;
+/*
+Project Name:    Jun Hackathon Prjoect
+Version:         0.0.001
+Author:          Team27
+License:         MIT License
+*/
 
-    font-size: larger;
-}
+@import "variables";
+@import "mixins";
+@import "layout";

@@ -1,0 +1,32 @@
+html {
+	font-size: 16px;
+	font-family: var(--font-family-base);
+}
+
+body {
+	margin: 0;
+	background: var(--page-background);
+	color: var(--color-primary);
+	font-size: $font-size-base;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+	margin-top: $headings-margin-top;
+	margin-bottom: $headings-margin-bottom;
+	font-family: var(--font-family-headings);
+	font-weight: var(--font-weight-headings);
+	line-height: var(--line-height-headings);
+}
+
+p,
+ul,
+ol,
+dl {
+	margin-top: 0;
+	margin-bottom: $paragraph-margin-bottom;
+}
+
+.container {
+	@include container();
+}
