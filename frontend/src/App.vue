@@ -70,7 +70,7 @@ useAppFetch(`/shuffledCards/${quantity.value}/?format=json`)
                             <div class="memo-board__card memo-board__card-type-2 is-active is-match">
                                 <span> #2 </span>
                             </div>
-                            <div class="memo-board__card memo-board__card-type-3  is-active is-not-match">
+                            <div class="memo-board__card memo-board__card-type-3 is-active is-not-match">
                                 <span> #3 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-4 is-open">
@@ -94,28 +94,16 @@ useAppFetch(`/shuffledCards/${quantity.value}/?format=json`)
                 <aside class="memo-aside">
                     <div class="memo-players">
                         <div id="memo-player-1" class="memo-players__player">
-                            <div class="memo-players__player-name">
-                                Игрок 1
-                            </div>
-                            <div class="memo-players__player-score">
-                                Открыто карточек: 2
-                            </div>
+                            <div class="memo-players__player-name">Игрок 1</div>
+                            <div class="memo-players__player-score">Открыто карточек: 2</div>
                         </div>
                         <div id="memo-player-2" class="memo-players__player is-active">
-                            <div class="memo-players__player-name">
-                                Игрок 2
-                            </div>
-                            <div class="memo-players__player-score">
-                                Открыто карточек: 1
-                            </div>
+                            <div class="memo-players__player-name">Игрок 2</div>
+                            <div class="memo-players__player-score">Открыто карточек: 1</div>
                         </div>
                         <div id="memo-player-2" class="memo-players__player">
-                            <div class="memo-players__player-name">
-                                Игрок 3
-                            </div>
-                            <div class="memo-players__player-score">
-                                Открыто карточек: 4
-                            </div>
+                            <div class="memo-players__player-name">Игрок 3</div>
+                            <div class="memo-players__player-score">Открыто карточек: 4</div>
                         </div>
                     </div>
 
