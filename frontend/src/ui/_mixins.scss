@@ -11,3 +11,20 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+@mixin button() {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	padding: $spacer $spacer * 1.5;
+	text-decoration: none;
+	border: none;
+	border-radius: var(--element-border-radius);
+	cursor: pointer;
+	transition: $transition;
+	box-shadow: $shadow;
+}
+
+@mixin button-hover() {
+	box-shadow: $shadow-hover-deep;
+}
