@@ -1,13 +1,13 @@
 html {
-    font-family: var(--font-family-base);
-    font-size: 16px;
+	font-family: var(--font-family-base);
+	font-size: 16px;
 }
 
 body {
-    margin: 0;
-    background: var(--page-background);
-    color: var(--color-primary);
-    font-size: $font-size-base;
+	margin: 0;
+	background: var(--page-background);
+	color: var(--color-primary);
+	font-size: $font-size-base;
 }
 
 h1,
@@ -22,21 +22,116 @@ h6,
 .h4,
 .h5,
 .h6 {
-    margin-top: $headings-margin-top;
-    margin-bottom: $headings-margin-bottom;
-    font-family: var(--font-family-headings);
-    font-weight: var(--font-weight-headings);
-    line-height: var(--line-height-headings);
+	margin-top: $headings-margin-top;
+	margin-bottom: $headings-margin-bottom;
+	font-family: var(--font-family-headings);
+	font-weight: var(--font-weight-headings);
+	line-height: var(--line-height-headings);
 }
 
 p,
 ul,
 ol,
 dl {
-    margin-top: 0;
-    margin-bottom: $paragraph-margin-bottom;
+	margin-top: 0;
+	margin-bottom: $paragraph-margin-bottom;
 }
 
 .container {
-    @include container;
+	@include container;
+}
+
+.field {
+	display: flex;
+	margin-top: $spacer;
+	margin-bottom: $spacer * 6;
+
+	&-wrapper {
+		display: flex;
+		padding: calc( #{$spacer} * 0.5 );
+		border: 1px solid var(--color-border);
+	}
+
+	&-container {
+		display: flex;
+		flex-wrap: wrap;
+		width: calc( ( ( #{$gutter} * 6 ) + #{$spacer} ) * var(--game-cards) );
+
+		&__card {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: $gutter * 6;
+			height: $gutter * 6;
+			margin: $spacer * 0.5;
+			cursor: pointer;
+			transition: $transition;
+
+			border-radius: var(--element-border-radius);
+			box-shadow: $shadow;
+
+			
+			background: #ccc;
+
+			span {
+				visibility: hidden;
+			}
+
+			&:hover {
+				box-shadow: $shadow-hover;
+				
+				span {
+					visibility: visible;
+				}
+			}
+
+			&-type-1 {
+				&:hover {
+					background: #def;
+				}
+			}
+
+			&-type-2 {
+				&:hover {
+					background: #dfe;
+				}
+			}
+
+			&-type-3 {
+				&:hover {
+					background: #efd;
+				}
+			}
+
+			&-type-4 {
+				&:hover {
+					background: #edf;
+				}
+			}
+
+			&-type-5 {
+				&:hover {
+					background: #fde;
+				}
+			}
+
+			&-type-6 {
+				&:hover {
+					background: #fed;
+				}
+			}
+
+			&-type-7 {
+				&:hover {
+					background: #acf;
+				}
+			}
+
+			&-type-8 {
+				&:hover {
+					background: #caf;
+				}
+			}
+		}
+	}
 }
