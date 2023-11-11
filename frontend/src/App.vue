@@ -105,7 +105,7 @@ useAppFetch(`/shuffledCards/${quantity.value}/?format=json`)
                             <div class="memo-board__card memo-board__card-type-2 is-active is-match">
                                 <span> #2 </span>
                             </div>
-                            <div class="memo-board__card memo-board__card-type-3  is-active is-not-match">
+                            <div class="memo-board__card memo-board__card-type-3 is-active is-not-match">
                                 <span> #3 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-4 is-open">
