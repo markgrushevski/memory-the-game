@@ -3,13 +3,13 @@
 ### Dev
 
 ```sh
-npm run dev
+npm run dev:local
 ```
 
 ### Preview
 
 ```sh
-npm run build && npm run preview
+npm run build:local && npm run preview:local
 ```
 
 ### Lint
