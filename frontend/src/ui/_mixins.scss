@@ -12,19 +12,51 @@
     margin-left: auto;
 }
 
-@mixin button() {
+@mixin button($padding: auto) {
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
-	padding: $spacer $spacer * 1.5;
 	text-decoration: none;
 	border: none;
 	border-radius: var(--element-border-radius);
 	cursor: pointer;
 	transition: $transition;
 	box-shadow: $shadow;
+
+	@if $padding == auto {
+		padding: $spacer $spacer * 1.5;
+	} @else {
+		padding: $padding;
+	}
 }
 
 @mixin button-hover() {
 	box-shadow: $shadow-hover-deep;
+}
+
+@mixin button-icon($padding: auto) {
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	border: none;
+	border-radius: var(--element-border-radius);
+	cursor: pointer;
+	transition: $transition;
+
+	@if $padding == auto {
+		padding: $spacer $spacer * 1.5;
+	} @else {
+		padding: $padding;
+	}
+
+	svg {
+		transition: $transition;
+	}
+}
+
+@mixin button-icon-hover() {
+	svg {
+		fill: var(--color-accent);
+	}
 }
