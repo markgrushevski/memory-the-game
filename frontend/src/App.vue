@@ -33,7 +33,7 @@ useAppFetch(`/shuffledCards/${quantity.value}/?format=json`)
         <section class="memo">
             <div class="memo-heading">
                 <div class="logo">
-                    <img src="src/ui/img/logo.svg" alt="Memo" />
+                    <img src="./ui/img/logo.svg" alt="Memo" />
                 </div>
             </div>
             <div class="memo-content">
