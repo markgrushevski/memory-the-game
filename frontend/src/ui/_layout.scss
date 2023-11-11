@@ -41,16 +41,30 @@ dl {
     @include container;
 }
 
+.button-icon {
+	@include button-icon(
+		$padding: $spacer * 0.5
+	);
+
+	font-size: 1.5rem;
+	background: transparent;
+
+	&:hover {
+		@include button-icon-hover();
+	}
+}
+
 .memo {
     display: flex;
     flex-direction: column;
-    margin-top: $spacer * 3;
-    margin-bottom: $spacer * 6;
-    gap: $spacer * 2;
+	max-width: var(--page-container);
+    margin: $spacer * 2 auto;
+    gap: $spacer;
 
-    &-heading {
+    &-header {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+		align-items: center;
 
         .logo {
             img {
@@ -58,76 +72,90 @@ dl {
                 height: 100%;
             }
         }
+
+		&__buttons {
+			display: flex;
+			align-items: center;
+			gap: $spacer * 0.5;
+		}
+
+		&:not(:last-child) {
+			padding-bottom: $spacer * 2; 
+			border-bottom: 1px solid var(--color-border);
+		}
     }
 
 	&-content {
 		display: flex;
-		gap: $spacer * 2;
-		width: calc( ( ( #{$gutter} * 6 ) + #{$spacer} ) * var(--game-cards) + 290px + ( #{$spacer} * 2 ) );
-		margin: 0 auto;
-		
-		&:not(:first-child) {
-			padding-top: $spacer * 2; 
-			border-top: 1px solid var(--color-border);
-		}
-	}
-
-	&-aside {
-		display: flex;
-		flex-direction: column;
-		width: 290px;
-	}
-
-	&-players {
-		display: flex;
 		flex-direction: column;
 		gap: $spacer;
+		margin: 0 auto;
+	}
 
-		&__player {
-			color: var(--color-mute);
+	&-score {
+		display: grid;
+		grid-template-columns: 100px 1fr 100px;
+		width: 100%;
+		gap: $spacer;
 
-			&.is-active {
-				color: var(--color-primary);
+		&__moves {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: $font-size-h6;
+
+			svg {
+				font-size: $spacer;
 			}
 
-			&-name {
-				font-size: $font-size-h3;
+			span {
+				&:not(:first-child) {
+					margin-left: $spacer * 0.5;
+				}
 			}
+		}
+
+		&__players {
+			display: flex;
+			gap: $spacer;
+			justify-self: center;
 	
-			&-score {
-				padding-top: $spacer * 0.5;
+			&-player {
+				color: var(--color-mute);
+	
+				&.is-active {
+					color: var(--color-primary);
+				}
+	
+				&-name {
+					font-size: $font-size-h4;
+				}
+		
+				&:not(:first-child) {
+					padding-left: $spacer;
+					border-left: 1px solid var(--color-border);
+				}
+			}
+		}
+
+		&__time {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: $font-size-h6;
+
+			svg {
+				font-size: $spacer;
 			}
 
-			&:not(:first-child) {
-				padding-top: $spacer;
-				border-top: 1px solid var(--color-border);
+			span {
+				&:not(:first-child) {
+					margin-left: $spacer * 0.5;
+				}
 			}
 		}
 	}
 
-	&-controls {
-		margin-top: auto;
-		padding-top: $spacer;
-
-		.memo-button {
-			@include button();
-
-			width: 100%;
-
-			&:hover {
-				@include button-hover();
-			}
-		}
-
-		.button-help {
-				
-		}
-
-		.button-restart {
-			color: var(--button-color);
-			background: var(--button-background);
-		}
-	}
 
     &-board {
         display: flex;
