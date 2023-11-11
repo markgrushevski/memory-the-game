@@ -63,8 +63,70 @@ dl {
 	&-content {
 		display: flex;
 		gap: $spacer * 2;
-		width: 800px;
+		width: calc( ( ( #{$gutter} * 6 ) + #{$spacer} ) * var(--game-cards) + 290px + ( #{$spacer} * 2 ) );
 		margin: 0 auto;
+		
+		&:not(:first-child) {
+			padding-top: $spacer * 2; 
+			border-top: 1px solid var(--color-border);
+		}
+	}
+
+	&-aside {
+		display: flex;
+		flex-direction: column;
+		width: 290px;
+	}
+
+	&-players {
+		display: flex;
+		flex-direction: column;
+		gap: $spacer;
+
+		&__player {
+			color: var(--color-mute);
+
+			&.is-active {
+				color: var(--color-primary);
+			}
+
+			&-name {
+				font-size: $font-size-h3;
+			}
+	
+			&-score {
+				padding-top: $spacer * 0.5;
+			}
+
+			&:not(:first-child) {
+				padding-top: $spacer;
+				border-top: 1px solid var(--color-border);
+			}
+		}
+	}
+
+	&-controls {
+		margin-top: auto;
+		padding-top: $spacer;
+
+		.memo-button {
+			@include button();
+
+			width: 100%;
+
+			&:hover {
+				@include button-hover();
+			}
+		}
+
+		.button-help {
+				
+		}
+
+		.button-restart {
+			color: var(--button-color);
+			background: var(--button-background);
+		}
 	}
 
 	&-board {
@@ -76,6 +138,7 @@ dl {
 			flex-wrap: wrap;
 			width: calc( ( ( #{$gutter} * 6 ) + #{$spacer} ) * var(--game-cards) );
 			padding: calc( #{$spacer} * 0.5 );
+			background: var(--layout-background);
 			border-radius: var(--element-border-radius);
 			border: 1px solid var(--color-border);
 		}
@@ -89,78 +152,91 @@ dl {
 			margin: $spacer * 0.5;
 			cursor: pointer;
 			transition: $transition;
-
 			border-radius: var(--element-border-radius);
 			box-shadow: $shadow;
+			overflow: hidden;
 
-			&.is-open {
+			span {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: calc( ( #{$gutter} * 6 ) - ( var(--game-card-border-width) * 2 ) );
+				height: calc( ( #{$gutter} * 6 ) - ( var(--game-card-border-width) * 2 ) );
+				border: var(--game-card-border-width) solid var(--game-card-border-color);
+				border-radius: var(--element-border-radius);
+			}
+
+			&.is-active {
+				border-color: #f00;
+
 				span {
 					visibility: visible;
 				}
-			}
 
-			&:not(.is-open) {
-				background: #ccc;
-
-				span {
-					visibility: hidden;
-				}
-
-				&:hover {
-					box-shadow: $shadow-hover;
-					
+				&.is-match {
 					span {
-						visibility: visible;
+						border-color: var(--game-card-border-color-match);
+					}
+				}
+	
+				&.is-not-match {
+					span {
+						border-color: var(--color-warning);
 					}
 				}
 			}
 
+			&.is-open {
+				span {
+					visibility: visible;
+					border-color: transparent;
+				}
+			}
+
+			&:not(.is-open, .is-active) {
+				background: var(--game-card-backface);
+
+				span {
+					visibility: hidden;
+				}
+			}
+
+			&:not(.is-open, .is-active):hover {
+				box-shadow: $shadow-hover;
+			}
+
+			// TEMP
+			// &:hover {
+			// 	span {
+			// 		visibility: visible;
+			// 		border-color: transparent;
+			// 	}
+			// }
+			// TEMP
+
 			&-type-1 {
-				&:hover {
-					background: #def;
-				}
+				background: #def;
 			}
-
 			&-type-2 {
-				&:hover {
-					background: #dfe;
-				}
+				background: #dfe;
 			}
-
 			&-type-3 {
-				&:hover {
-					background: #efd;
-				}
+				background: #efd;
 			}
-
 			&-type-4 {
-				&:hover {
-					background: #edf;
-				}
+				background: #edf;
 			}
-
 			&-type-5 {
-				&:hover {
-					background: #fde;
-				}
+				background: #fde;
 			}
-
 			&-type-6 {
-				&:hover {
-					background: #fed;
-				}
+				background: #fed;
 			}
-
 			&-type-7 {
-				&:hover {
-					background: #acf;
-				}
+				background: #acf;
 			}
-
 			&-type-8 {
-				&:hover {
-					background: #caf;
-				}
+				background: #caf;
 			}
 		}
 	}

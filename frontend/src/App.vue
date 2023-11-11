@@ -29,7 +29,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/?format=json')
                                     #1
                                 </span>
                             </div>
-                            <div class="memo-board__card memo-board__card-type-2">
+                            <div class="memo-board__card memo-board__card-type-2 is-active is-match">
                                 <span>
                                     #2
                                 </span>
@@ -39,12 +39,12 @@ useFetch('https://django-api-eodw.onrender.com/api/items/?format=json')
                                     #3
                                 </span>
                             </div>
-                            <div class="memo-board__card memo-board__card-type-4">
+                            <div class="memo-board__card memo-board__card-type-4 is-open">
                                 <span>
                                     #4
                                 </span>
                             </div>
-                            <div class="memo-board__card memo-board__card-type-5">
+                            <div class="memo-board__card memo-board__card-type-5 is-active is-not-match">
                                 <span>
                                     #5
                                 </span>
@@ -54,7 +54,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/?format=json')
                                     #6
                                 </span>
                             </div>
-                            <div class="memo-board__card memo-board__card-type-7">
+                            <div class="memo-board__card memo-board__card-type-7 is-active">
                                 <span>
                                     #7
                                 </span>
@@ -69,17 +69,17 @@ useFetch('https://django-api-eodw.onrender.com/api/items/?format=json')
                                     #1
                                 </span>
                             </div>
-                            <div class="memo-board__card memo-board__card-type-2">
+                            <div class="memo-board__card memo-board__card-type-2 is-active is-match">
                                 <span>
                                     #2
                                 </span>
                             </div>
-                            <div class="memo-board__card memo-board__card-type-3">
+                            <div class="memo-board__card memo-board__card-type-3  is-active is-not-match">
                                 <span>
                                     #3
                                 </span>
                             </div>
-                            <div class="memo-board__card memo-board__card-type-4">
+                            <div class="memo-board__card memo-board__card-type-4 is-open">
                                 <span>
                                     #4
                                 </span>
@@ -107,30 +107,53 @@ useFetch('https://django-api-eodw.onrender.com/api/items/?format=json')
                         </div>
                     </div>
                 </main>
-                <aside>
+                <aside class="memo-aside">
                     <div class="memo-players">
-                        <div class="memo-players__player">
-                            Player 1
+                        <div id="memo-player-1" class="memo-players__player">
+                            <div class="memo-players__player-name">
+                                Игрок 1
+                            </div>
+                            <div class="memo-players__player-score">
+                                Открыто карточек: 2
+                            </div>
                         </div>
-                        <div class="memo-players__player">
-                            Player 2
+                        <div id="memo-player-2" class="memo-players__player is-active">
+                            <div class="memo-players__player-name">
+                                Игрок 2
+                            </div>
+                            <div class="memo-players__player-score">
+                                Открыто карточек: 1
+                            </div>
                         </div>
+                        <div id="memo-player-2" class="memo-players__player">
+                            <div class="memo-players__player-name">
+                                Игрок 3
+                            </div>
+                            <div class="memo-players__player-score">
+                                Открыто карточек: 4
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="memo-controls">
+                        <button class="memo-button button-help" aria-label="Правила игры" type="submit">
+                            Правила игры
+                        </button>
+                        <!--
+                        <button class="memo-button button-restart" aria-label="Начать новую игру" type="submit">
+                            Начать новую игру
+                        </button>
+                        -->
                     </div>
                 </aside>
             </div>
         </section>
 
-        <p>
-            In a land far, far away, where pixels danced and code waltzed, Byte 27 emerged as a beacon of digital
-            creativity. The binary winds whispered secrets of innovation, and the circuitry hummed with the melody of
-            progress. In this enchanted realm, ones and zeros pirouetted in a dazzling display, weaving tales of bytes
-            and dreams. Lorem Ipsum bowed to the Byte 27 symphony, for in this kingdom of creation, the code became
-            poetry, and innovation, an eternal dance.
-        </p>
-
+        <!--
         <pre>
             {{ _data }}
         </pre>
+        -->
     </div>
 </template>
 
