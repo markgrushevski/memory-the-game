@@ -1,13 +1,13 @@
 html {
-	font-family: var(--font-family-base);
-	font-size: 16px;
+    font-family: var(--font-family-base);
+    font-size: 16px;
 }
 
 body {
-	margin: 0;
-	background: var(--page-background);
-	color: var(--color-primary);
-	font-size: $font-size-base;
+    margin: 0;
+    background: var(--page-background);
+    color: var(--color-primary);
+    font-size: $font-size-base;
 }
 
 h1,
@@ -22,43 +22,43 @@ h6,
 .h4,
 .h5,
 .h6 {
-	margin-top: $headings-margin-top;
-	margin-bottom: $headings-margin-bottom;
-	font-family: var(--font-family-headings);
-	font-weight: var(--font-weight-headings);
-	line-height: var(--line-height-headings);
+    margin-top: $headings-margin-top;
+    margin-bottom: $headings-margin-bottom;
+    font-family: var(--font-family-headings);
+    font-weight: var(--font-weight-headings);
+    line-height: var(--line-height-headings);
 }
 
 p,
 ul,
 ol,
 dl {
-	margin-top: 0;
-	margin-bottom: $paragraph-margin-bottom;
+    margin-top: 0;
+    margin-bottom: $paragraph-margin-bottom;
 }
 
 .container {
-	@include container;
+    @include container;
 }
 
 .memo {
-	display: flex;
-	flex-direction: column;
-	margin-top: $spacer * 3;
-	margin-bottom: $spacer * 6;
-	gap: $spacer * 2;
+    display: flex;
+    flex-direction: column;
+    margin-top: $spacer * 3;
+    margin-bottom: $spacer * 6;
+    gap: $spacer * 2;
 
-	&-heading {
-		display: flex;
-		justify-content: center;
+    &-heading {
+        display: flex;
+        justify-content: center;
 
-		.logo {
-			img {
-				width: 100%;
-				height: 100%;
-			}
-		}
-	}
+        .logo {
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
 
 	&-content {
 		display: flex;
@@ -129,9 +129,9 @@ dl {
 		}
 	}
 
-	&-board {
-		display: flex;
-		justify-content: center;
+    &-board {
+        display: flex;
+        justify-content: center;
 
 		&-inner {
 			display: flex;
