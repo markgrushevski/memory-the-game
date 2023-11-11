@@ -14,92 +14,109 @@ useFetch('https://django-api-eodw.onrender.com/api/items/?format=json')
 
 <template>
     <div class="container">
-        <h1>Hello world</h1>
-
-        <section class="field">
-            <div class="field-wrapper">
-                <div class="field-container field-container-4">
-                    <div class="field-container__card field-container__card-type-1">
-                        <span>
-                            #1
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-2">
-                        <span>
-                            #2
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-3">
-                        <span>
-                            #3
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-4">
-                        <span>
-                            #4
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-5">
-                        <span>
-                            #5
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-6">
-                        <span>
-                            #6
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-7">
-                        <span>
-                            #7
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-8">
-                        <span>
-                            #8
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-1">
-                        <span>
-                            #1
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-2">
-                        <span>
-                            #2
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-3">
-                        <span>
-                            #3
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-4">
-                        <span>
-                            #4
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-5">
-                        <span>
-                            #5
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-6">
-                        <span>
-                            #6
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-7">
-                        <span>
-                            #7
-                        </span>
-                    </div>
-                    <div class="field-container__card field-container__card-type-8">
-                        <span>
-                            #8
-                        </span>
-                    </div>
+        <section class="memo">
+            <div class="memo-heading">
+                <div class="logo">
+                    <img src="src/ui/img/logo.svg" alt="Memo">
                 </div>
+            </div>
+            <div class="memo-content">
+                <main>
+                    <div class="memo-board">
+                        <div class="memo-board-inner">
+                            <div class="memo-board__card memo-board__card-type-1">
+                                <span>
+                                    #1
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-2">
+                                <span>
+                                    #2
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-3">
+                                <span>
+                                    #3
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-4">
+                                <span>
+                                    #4
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-5">
+                                <span>
+                                    #5
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-6">
+                                <span>
+                                    #6
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-7">
+                                <span>
+                                    #7
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-8">
+                                <span>
+                                    #8
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-1">
+                                <span>
+                                    #1
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-2">
+                                <span>
+                                    #2
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-3">
+                                <span>
+                                    #3
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-4">
+                                <span>
+                                    #4
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-5">
+                                <span>
+                                    #5
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-6">
+                                <span>
+                                    #6
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-7">
+                                <span>
+                                    #7
+                                </span>
+                            </div>
+                            <div class="memo-board__card memo-board__card-type-8">
+                                <span>
+                                    #8
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+                <aside>
+                    <div class="memo-players">
+                        <div class="memo-players__player">
+                            Player 1
+                        </div>
+                        <div class="memo-players__player">
+                            Player 2
+                        </div>
+                    </div>
+                </aside>
             </div>
         </section>
 
