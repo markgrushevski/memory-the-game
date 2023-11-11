@@ -2,7 +2,7 @@
 import { useAppFetch } from '@lib';
 import { ref } from 'vue';
 
-const cards = ref([]);
+const cards = ref(/** @type {import('@/types').Card[]} */ ([]));
 
 const quantity = ref(/** @type {16 | 24 | 36} */ (16));
 
@@ -18,9 +18,9 @@ useAppFetch(`/shuffledCards/${quantity.value}/?format=json`)
     .json()
     .then(({ data }) => {
         console.log(data.value);
-    }); */
-
-/* useFetch('https://django-api-eodw.onrender.com/api/items/2')
+    }); 
+     
+useFetch('https://django-api-eodw.onrender.com/api/items/2')
     .delete()
     .json()
     .then(({ data }) => {
@@ -264,11 +264,31 @@ useAppFetch(`/shuffledCards/${quantity.value}/?format=json`)
             </div>
         </section>
 
-        <!--
-        <pre>
-            {{ cards }}
-        </pre>
-        -->
+        <!-- -->
+        <section class="memo" style="position: absolute; top: 75%; opacity: 0.75">
+            <h1 class="logo">Тестирую отрисовку карточек</h1>
+            <div class="memo-content">
+                <main>
+                    <div class="memo-board">
+                        <div class="memo-board-inner">
+                            <!-- is-active is-match is-not-match -->
+                            <div
+                                v-for="card in cards"
+                                :key="card.id"
+                                class="memo-board__card"
+                                @click="
+                                    (ev) => {
+                                        ev.target.classList.add('is-active');
+                                    }
+                                "
+                            >
+                                <span>{{ card.id }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </section>
     </div>
 </template>
 
