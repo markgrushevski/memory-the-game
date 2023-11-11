@@ -1,13 +1,13 @@
 html {
-	font-family: var(--font-family-base);
-	font-size: 16px;
+    font-family: var(--font-family-base);
+    font-size: 16px;
 }
 
 body {
-	margin: 0;
-	background: var(--page-background);
-	color: var(--color-primary);
-	font-size: $font-size-base;
+    margin: 0;
+    background: var(--page-background);
+    color: var(--color-primary);
+    font-size: $font-size-base;
 }
 
 h1,
@@ -22,146 +22,146 @@ h6,
 .h4,
 .h5,
 .h6 {
-	margin-top: $headings-margin-top;
-	margin-bottom: $headings-margin-bottom;
-	font-family: var(--font-family-headings);
-	font-weight: var(--font-weight-headings);
-	line-height: var(--line-height-headings);
+    margin-top: $headings-margin-top;
+    margin-bottom: $headings-margin-bottom;
+    font-family: var(--font-family-headings);
+    font-weight: var(--font-weight-headings);
+    line-height: var(--line-height-headings);
 }
 
 p,
 ul,
 ol,
 dl {
-	margin-top: 0;
-	margin-bottom: $paragraph-margin-bottom;
+    margin-top: 0;
+    margin-bottom: $paragraph-margin-bottom;
 }
 
 .container {
-	@include container;
+    @include container;
 }
 
 .memo {
-	display: flex;
-	flex-direction: column;
-	margin-top: $spacer * 3;
-	margin-bottom: $spacer * 6;
-	gap: $spacer * 2;
+    display: flex;
+    flex-direction: column;
+    margin-top: $spacer * 3;
+    margin-bottom: $spacer * 6;
+    gap: $spacer * 2;
 
-	&-heading {
-		display: flex;
-		justify-content: center;
+    &-heading {
+        display: flex;
+        justify-content: center;
 
-		.logo {
-			img {
-				width: 100%;
-				height: 100%;
-			}
-		}
-	}
+        .logo {
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
 
-	&-content {
-		display: flex;
-		gap: $spacer * 2;
-		width: 800px;
-		margin: 0 auto;
-	}
+    &-content {
+        display: flex;
+        gap: $spacer * 2;
+        width: 800px;
+        margin: 0 auto;
+    }
 
-	&-board {
-		display: flex;
-		justify-content: center;
+    &-board {
+        display: flex;
+        justify-content: center;
 
-		&-inner {
-			display: flex;
-			flex-wrap: wrap;
-			width: calc( ( ( #{$gutter} * 6 ) + #{$spacer} ) * var(--game-cards) );
-			padding: calc( #{$spacer} * 0.5 );
-			border-radius: var(--element-border-radius);
-			border: 1px solid var(--color-border);
-		}
+        &-inner {
+            display: flex;
+            flex-wrap: wrap;
+            width: calc(((#{$gutter} * 6) + #{$spacer}) * var(--game-cards));
+            padding: calc(#{$spacer} * 0.5);
+            border: 1px solid var(--color-border);
+            border-radius: var(--element-border-radius);
+        }
 
-		&__card {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: $gutter * 6;
-			height: $gutter * 6;
-			margin: $spacer * 0.5;
-			cursor: pointer;
-			transition: $transition;
+        &__card {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: $gutter * 6;
+            height: $gutter * 6;
+            margin: $spacer * 0.5;
+            transition: $transition;
 
-			border-radius: var(--element-border-radius);
-			box-shadow: $shadow;
+            border-radius: var(--element-border-radius);
+            box-shadow: $shadow;
+            cursor: pointer;
 
-			&.is-open {
-				span {
-					visibility: visible;
-				}
-			}
+            &.is-open {
+                span {
+                    visibility: visible;
+                }
+            }
 
-			&:not(.is-open) {
-				background: #ccc;
+            &:not(.is-open) {
+                background: #cccccc;
 
-				span {
-					visibility: hidden;
-				}
+                span {
+                    visibility: hidden;
+                }
 
-				&:hover {
-					box-shadow: $shadow-hover;
-					
-					span {
-						visibility: visible;
-					}
-				}
-			}
+                &:hover {
+                    box-shadow: $shadow-hover;
 
-			&-type-1 {
-				&:hover {
-					background: #def;
-				}
-			}
+                    span {
+                        visibility: visible;
+                    }
+                }
+            }
 
-			&-type-2 {
-				&:hover {
-					background: #dfe;
-				}
-			}
+            &-type-1 {
+                &:hover {
+                    background: #ddeeff;
+                }
+            }
 
-			&-type-3 {
-				&:hover {
-					background: #efd;
-				}
-			}
+            &-type-2 {
+                &:hover {
+                    background: #ddffee;
+                }
+            }
 
-			&-type-4 {
-				&:hover {
-					background: #edf;
-				}
-			}
+            &-type-3 {
+                &:hover {
+                    background: #eeffdd;
+                }
+            }
 
-			&-type-5 {
-				&:hover {
-					background: #fde;
-				}
-			}
+            &-type-4 {
+                &:hover {
+                    background: #eeddff;
+                }
+            }
 
-			&-type-6 {
-				&:hover {
-					background: #fed;
-				}
-			}
+            &-type-5 {
+                &:hover {
+                    background: #ffddee;
+                }
+            }
 
-			&-type-7 {
-				&:hover {
-					background: #acf;
-				}
-			}
+            &-type-6 {
+                &:hover {
+                    background: #ffeedd;
+                }
+            }
 
-			&-type-8 {
-				&:hover {
-					background: #caf;
-				}
-			}
-		}
-	}
+            &-type-7 {
+                &:hover {
+                    background: #aaccff;
+                }
+            }
+
+            &-type-8 {
+                &:hover {
+                    background: #ccaaff;
+                }
+            }
+        }
+    }
 }

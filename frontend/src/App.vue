@@ -1,15 +1,31 @@
 <script setup>
-import { useFetch } from '@vueuse/core';
+import { useAppFetch } from '@lib';
 import { ref } from 'vue';
 
-const _data = ref('no data');
+const cards = ref([]);
 
-useFetch('https://django-api-eodw.onrender.com/api/items/?format=json')
+const quantity = ref(/** @type {16 | 24 | 36} */ (16));
+
+useAppFetch(`/shuffledCards/${quantity.value}/?format=json`)
     .get()
     .json()
     .then(({ data }) => {
-        _data.value = data.value;
+        cards.value = data.value;
     });
+
+/* useFetch('https://django-api-eodw.onrender.com/api/items/3/')
+    .put(JSON.stringify({ name: 'PUT', description: 'меняю третий' }), 'application/json')
+    .json()
+    .then(({ data }) => {
+        console.log(data.value);
+    }); */
+
+/* useFetch('https://django-api-eodw.onrender.com/api/items/2')
+    .delete()
+    .json()
+    .then(({ data }) => {
+        console.log(data.value);
+    }); */
 </script>
 
 <template>
@@ -17,7 +33,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/?format=json')
         <section class="memo">
             <div class="memo-heading">
                 <div class="logo">
-                    <img src="src/ui/img/logo.svg" alt="Memo">
+                    <img src="src/ui/img/logo.svg" alt="Memo" />
                 </div>
             </div>
             <div class="memo-content">
@@ -25,96 +41,60 @@ useFetch('https://django-api-eodw.onrender.com/api/items/?format=json')
                     <div class="memo-board">
                         <div class="memo-board-inner">
                             <div class="memo-board__card memo-board__card-type-1">
-                                <span>
-                                    #1
-                                </span>
+                                <span> #1 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-2">
-                                <span>
-                                    #2
-                                </span>
+                                <span> #2 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-3">
-                                <span>
-                                    #3
-                                </span>
+                                <span> #3 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-4">
-                                <span>
-                                    #4
-                                </span>
+                                <span> #4 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-5">
-                                <span>
-                                    #5
-                                </span>
+                                <span> #5 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-6">
-                                <span>
-                                    #6
-                                </span>
+                                <span> #6 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-7">
-                                <span>
-                                    #7
-                                </span>
+                                <span> #7 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-8">
-                                <span>
-                                    #8
-                                </span>
+                                <span> #8 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-1">
-                                <span>
-                                    #1
-                                </span>
+                                <span> #1 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-2">
-                                <span>
-                                    #2
-                                </span>
+                                <span> #2 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-3">
-                                <span>
-                                    #3
-                                </span>
+                                <span> #3 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-4">
-                                <span>
-                                    #4
-                                </span>
+                                <span> #4 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-5">
-                                <span>
-                                    #5
-                                </span>
+                                <span> #5 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-6">
-                                <span>
-                                    #6
-                                </span>
+                                <span> #6 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-7">
-                                <span>
-                                    #7
-                                </span>
+                                <span> #7 </span>
                             </div>
                             <div class="memo-board__card memo-board__card-type-8">
-                                <span>
-                                    #8
-                                </span>
+                                <span> #8 </span>
                             </div>
                         </div>
                     </div>
                 </main>
                 <aside>
                     <div class="memo-players">
-                        <div class="memo-players__player">
-                            Player 1
-                        </div>
-                        <div class="memo-players__player">
-                            Player 2
-                        </div>
+                        <div class="memo-players__player">Player 1</div>
+                        <div class="memo-players__player">Player 2</div>
                     </div>
                 </aside>
             </div>
@@ -129,7 +109,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/?format=json')
         </p>
 
         <pre>
-            {{ _data }}
+            {{ cards }}
         </pre>
     </div>
 </template>
