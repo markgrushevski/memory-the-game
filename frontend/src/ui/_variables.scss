@@ -1,6 +1,6 @@
 :root {
-    --page-container: 912px;
-    --page-content: 800px;
+    --page-container: 272px;
+    --page-content: 100%;
     --page-background: #efe1cb;
     --layout-background: #fefdfa;
     --color-primary: #3f2e2b;
@@ -22,12 +22,21 @@
     --element-border-radius: 4px;
 
     // Game Field
-    --game-cards: 8;
+    --game-cards: 4;
     --game-card-border-width: 4px;
     --game-card-backface: #f3e8d6;
     --game-card-border-color: #f3e8d6;
     --game-card-border-color-active: #e8b462;
     --game-card-border-color-match: #5d7c42;
+
+	@media (min-width: 360px) {
+		--page-container: 90%;
+	}
+
+	@media (min-width: 992px) {
+		--page-container: 912px;
+		--page-content: 800px;
+	}
 }
 
 // Spacing

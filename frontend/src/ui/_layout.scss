@@ -178,12 +178,16 @@ select {
         &-inner {
             display: flex;
             flex-wrap: wrap;
-            width: calc(((#{$gutter} * 6) + #{$spacer}) * var(--game-cards));
+            width: calc(((#{$gutter} * 3) + #{$spacer}) * var(--game-cards));
             padding: calc(#{$spacer} * 0.5);
             border: var(--element-border-width) solid var(--color-border);
             border-radius: var(--element-border-radius);
             background: var(--layout-background);
             box-shadow: $shadow;
+
+			@media (min-width: 576px) {
+				width: calc(((#{$gutter} * 6) + #{$spacer}) * var(--game-cards));
+			}
         }
 
         &__card {
@@ -191,8 +195,8 @@ select {
             position: relative;
             align-items: center;
             justify-content: center;
-            width: $gutter * 6;
-            height: $gutter * 6;
+            width: $gutter * 3;
+            height: $gutter * 3;
             margin: $spacer * 0.5;
             overflow: hidden;
             transition: $transition;
@@ -201,9 +205,19 @@ select {
             cursor: pointer;
 
             img {
-                width: $gutter * 4;
-                height: $gutter * 4;
+                width: $gutter * 2;
+                height: $gutter * 2;
             }
+
+			@media (min-width: 576px) {
+				width: $gutter * 6;
+				height: $gutter * 6;
+
+				img {
+					width: $gutter * 4;
+					height: $gutter * 4;
+				}
+			}
 
             &::before {
                 content: '';
@@ -285,15 +299,6 @@ select {
             &:not(.is-open, .is-active):hover {
                 box-shadow: $shadow-hover;
             }
-
-            // TEMP
-            // &:hover {
-            // 	span {
-            // 		visibility: visible;
-            // 		border-color: transparent;
-            // 	}
-            // }
-            // TEMP
 
             &-type-1 {
                 background: #f6f3f2;
