@@ -232,8 +232,16 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
 
     <section v-if="showEndGameModal" class="memo-modal memo-modal-end">
         <div class="memo-modal__container">
-            <div class="memo-modal__header">Результаты</div>
-            <div class="memo-modal__content">Modal end</div>
+            <div class="memo-modal__header">Игра окнчена</div>
+            <div class="memo-modal__content">
+                <button
+                        class="memo-button button-restart"
+                        aria-label="Начать новую игру"
+                        title="Начать новую игру"
+                    >
+                        Попробовать еще раз
+                    </button>
+            </div>
             <div class="memo-modal__close">
                 <svg
                     id="Layer_1"
