@@ -33,9 +33,11 @@ Backend: Python, Django, Postgresql, API, poetry
 ![Field](https://github.com/markgrushevski/Team27/blob/main/backend/demonstration/6.png?raw=true)
 
 5. При обнаружении пары, они останутся открытыми.
+
 ![Correct](https://github.com/markgrushevski/Team27/blob/main/backend/demonstration/1.png?raw=true)
 
 6. Если карточки не совпадают, они окрасятся в красный и закроются.
+
 ![Incorrect](https://github.com/markgrushevski/Team27/blob/main/backend/demonstration/2.png?raw=true)
 
 7. Открыть все карточки для завершения игры.
