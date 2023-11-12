@@ -336,6 +336,7 @@ select {
 }
 
 .memo-modal {
+    display: flex;
     position: fixed;
     z-index: 100;
     inset: 0;
@@ -371,10 +372,6 @@ select {
             align-items: flex-start;
             justify-content: flex-start;
         }
-    }
-
-    &.is-active {
-        display: flex;
     }
 
     &__overlay {

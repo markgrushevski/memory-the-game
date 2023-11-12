@@ -58,6 +58,11 @@ export const usePlayersStore = defineStore('players', () => {
             });
     }
 
+    function $reset() {
+        currentPlayers.value = [];
+        turnIndex.value = 0;
+    }
+
     return {
         players,
         currentPlayers,
@@ -65,6 +70,7 @@ export const usePlayersStore = defineStore('players', () => {
         createPlayer,
         togglePlayersTurn,
         addScoreToCurrentPlayer,
-        fetchPlayers
+        fetchPlayers,
+        $reset
     };
 });
