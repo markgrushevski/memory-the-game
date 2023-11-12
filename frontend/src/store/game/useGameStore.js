@@ -34,7 +34,7 @@ export const useGameStore = defineStore('game', () => {
         playersStore.fetchPlayers();
 
         intervalId.value = setInterval(() => {
-            gameTime.value = gameTime.value - 1;
+            gameTime.value -= 1;
         }, 1000);
     }
 

@@ -18,6 +18,8 @@ function closeAllModals() {
     showHelpModal.value = false;
 }
 
+const time = useDateFormat(gameStore.gameTime, 'mm:ss');
+
 const playerName = ref('');
 const playerDifficulty = ref('easy');
 const playerQuantity = ref(16);
@@ -25,9 +27,11 @@ const playerQuantity = ref(16);
 const openedCards = ref(/** @type {import('@/main').Card[]} */ []);
 const selectedCards = ref(/** @type {[import('@/main').Card, import('@/main').Card]} */ ([]));
 
-const field = ref(/** @type {HTMLElement | null} */ (null));
+const checkIsMatch = computed(() => selectedCards.value[0].id === selectedCards.value[1].id);
 
 const getImagePath = computed(() => (url) => new URL(`./ui/img/${url}`, import.meta.url).href);
+
+const field = ref(/** @type {HTMLElement | null} */ (null));
 
 watch(
     () => selectedCards.value,
@@ -35,7 +39,13 @@ watch(
         if (selectedCards.value.length === 2) {
             field.value.style.pointerEvents = 'none';
 
-            if (selectedCards.value[0].id === selectedCards.value[1].id) {
+            historyStore.makeHistoryStep(
+                checkIsMatch.value,
+                playersStore.currentPlayers[playersStore.turnIndex],
+                selectedCards.value
+            );
+
+            if (checkIsMatch.value) {
                 openedCards.value.push(selectedCards.value[0]);
                 openedCards.value.push(selectedCards.value[1]);
             }
@@ -136,7 +146,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                             :class="{ 'is-active': playersStore.currentPlayers[playersStore.turnIndex] === player }"
                         >
                             <div class="memo-score__players-player-name">{{ player.name }}</div>
-                            <div>{{ player.score }}</div>
+                            <div v-if="false">{{ player.score }}</div>
                         </div>
                     </div>
                     <div class="memo-score__time">
@@ -148,7 +158,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                                 d="M12,6a1,1,0,0,0-1,1v4.325L7.629,13.437a1,1,0,0,0,1.062,1.7l3.84-2.4A1,1,0,0,0,13,11.879V7A1,1,0,0,0,12,6Z"
                             />
                         </svg>
-                        <span>{{ useDateFormat(gameStore.gameTime, 'mm:ss').value }}</span>
+                        <span v-if="false">{{ time }}</span>
                     </div>
                 </div>
                 <main>
@@ -161,10 +171,8 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                                 class="memo-board__card memo-board__card-type-1"
                                 :class="{
                                     'is-active': selectedCards.find((_card) => _card.cardId === card.cardId),
-                                    'is-match':
-                                        selectedCards.length === 2 && selectedCards[0].id === selectedCards[1].id,
-                                    'is-not-match':
-                                        selectedCards.length === 2 && selectedCards[0].id !== selectedCards[1].id,
+                                    'is-match': selectedCards.length === 2 && checkIsMatch,
+                                    'is-not-match': selectedCards.length === 2 && !checkIsMatch,
                                     'is-open': openedCards.find((_card) => _card.cardId === card.cardId)
                                 }"
                                 @click="
@@ -196,8 +204,8 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                     <label for="name">Имя:</label>
                     <input v-model="playerName" required class="memo__input" type="text" name="name" />
 
-                    <label for="difficulty">Уровень сложности:</label>
-                    <select id="difficulty" v-model="playerDifficulty" required name="difficulty">
+                    <label v-if="false" for="difficulty">Уровень сложности:</label>
+                    <select v-if="false" id="difficulty" v-model="playerDifficulty" required name="difficulty">
                         <option value="easy">Легкий</option>
                         <option value="medium">Средний</option>
                         <option value="hard">Трудный</option>
@@ -235,15 +243,19 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
         <div class="memo-modal__container">
             <div class="memo-modal__header">Игра окончена</div>
             <div class="memo-modal__content">
-                <h3>Поздравлем!</h3>
+                <h3>Поздравляем!</h3>
                 <p>Вы открыли все карточки!</p>
                 <button
-                        class="memo-button button-restart"
-                        aria-label="Начать новую игру"
-                        title="Начать новую игру"
-                    >
-                        Попробовать еще раз
-                    </button>
+                    class="memo-button button-restart"
+                    aria-label="Начать новую игру"
+                    title="Начать новую игру"
+                    @click="
+                        closeAllModals();
+                        showNewGameModal = true;
+                    "
+                >
+                    Попробовать еще раз
+                </button>
             </div>
             <div class="memo-modal__close" @click="showNewGameModal = false">
                 <svg
@@ -297,7 +309,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
 
                 <h2>Удачи и приятной игры!</h2>
             </div>
-            <div class="memo-modal__close" @click="showNewGameModal = false">
+            <div class="memo-modal__close" @click="showHelpModal = false">
                 <svg
                     id="Layer_1"
                     xmlns="http://www.w3.org/2000/svg"

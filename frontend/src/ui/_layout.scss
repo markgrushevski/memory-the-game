@@ -185,9 +185,9 @@ select {
             background: var(--layout-background);
             box-shadow: $shadow;
 
-			@media (min-width: 576px) {
-				width: calc(((#{$gutter} * 6) + #{$spacer}) * var(--game-cards));
-			}
+            @media (width >= 576px) {
+                width: calc(((#{$gutter} * 6) + #{$spacer}) * var(--game-cards));
+            }
         }
 
         &__card {
@@ -209,15 +209,15 @@ select {
                 height: $gutter * 2;
             }
 
-			@media (min-width: 576px) {
-				width: $gutter * 6;
-				height: $gutter * 6;
+            @media (width >= 576px) {
+                width: $gutter * 6;
+                height: $gutter * 6;
 
-				img {
-					width: $gutter * 4;
-					height: $gutter * 4;
-				}
-			}
+                img {
+                    width: $gutter * 4;
+                    height: $gutter * 4;
+                }
+            }
 
             &::before {
                 content: '';
@@ -365,11 +365,11 @@ select {
     }
 
     &-end {
-		button {
-			&:not(:first-child) {
-				margin-top: $spacer * 2;
-			}
-		}
+        button {
+            &:not(:first-child) {
+                margin-top: $spacer * 2;
+            }
+        }
     }
 
     &-help {

@@ -29,14 +29,14 @@
     --game-card-border-color-active: #e8b462;
     --game-card-border-color-match: #5d7c42;
 
-	@media (min-width: 360px) {
-		--page-container: 90%;
-	}
+    @media (width >= 360px) {
+        --page-container: 90%;
+    }
 
-	@media (min-width: 992px) {
-		--page-container: 912px;
-		--page-content: 800px;
-	}
+    @media (width >= 992px) {
+        --page-container: 912px;
+        --page-content: 800px;
+    }
 }
 
 // Spacing
