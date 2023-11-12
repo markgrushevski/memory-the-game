@@ -235,6 +235,8 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
         <div class="memo-modal__container">
             <div class="memo-modal__header">Игра окнчена</div>
             <div class="memo-modal__content">
+                <h3>Поздравлем!</h3>
+                <p>Вы открыли все карточки!</p>
                 <button
                         class="memo-button button-restart"
                         aria-label="Начать новую игру"

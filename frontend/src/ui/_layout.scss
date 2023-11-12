@@ -365,6 +365,11 @@ select {
     }
 
     &-end {
+		button {
+			&:not(:first-child) {
+				margin-top: $spacer * 2;
+			}
+		}
     }
 
     &-help {
