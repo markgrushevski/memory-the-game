@@ -89,52 +89,52 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                     <div class="memo-board">
                         <div class="memo-board-inner">
                             <div class="memo-board__card memo-board__card-type-1">
-                                <img src="src/ui/img/goggles.svg" alt="Мемо карточка">
+                                <img src="./ui/img/goggles.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-2 is-active is-match">
-                                <img src="src/ui/img/popsicle.svg" alt="Мемо карточка">
+                                <img src="./ui/img/popsicle.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-3">
-                                <img src="src/ui/img/ice-cream-cone.svg" alt="Мемо карточка">
+                                <img src="./ui/img/ice-cream-cone.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-4 is-open">
-                                <img src="src/ui/img/banana.svg" alt="Мемо карточка">
+                                <img src="./ui/img/banana.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-5 is-active is-not-match">
-                                <img src="src/ui/img/beach-ball.svg" alt="Мемо карточка">
+                                <img src="./ui/img/beach-ball.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-6">
-                                <img src="src/ui/img/camera.svg" alt="Мемо карточка">
+                                <img src="./ui/img/camera.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-7 is-active">
-                                <img src="src/ui/img/sun.svg" alt="Мемо карточка">
+                                <img src="./ui/img/sun.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-8">
-                                <img src="src/ui/img/slippers.svg" alt="Мемо карточка">
+                                <img src="./ui/img/slippers.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-1">
-                                <img src="src/ui/img/goggles.svg" alt="Мемо карточка">
+                                <img src="./ui/img/goggles.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-2 is-active is-match">
-                                <img src="src/ui/img/popsicle.svg" alt="Мемо карточка">
+                                <img src="./ui/img/popsicle.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-3 is-active is-not-match">
-                                <img src="src/ui/img/ice-cream-cone.svg" alt="Мемо карточка">
+                                <img src="./ui/img/ice-cream-cone.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-4 is-open">
-                                <img src="src/ui/img/banana.svg" alt="Мемо карточка">
+                                <img src="./ui/img/banana.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-5">
-                                <img src="src/ui/img/beach-ball.svg" alt="Мемо карточка">
+                                <img src="./ui/img/beach-ball.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-6">
-                                <img src="src/ui/img/camera.svg" alt="Мемо карточка">
+                                <img src="./ui/img/camera.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-7">
-                                <img src="src/ui/img/sun.svg" alt="Мемо карточка">
+                                <img src="./ui/img/sun.svg" alt="Мемо карточка">
                             </div>
                             <div class="memo-board__card memo-board__card-type-8">
-                                <img src="src/ui/img/slippers.svg" alt="Мемо карточка">
+                                <img src="./ui/img/slippers.svg" alt="Мемо карточка">
                             </div>
 
 

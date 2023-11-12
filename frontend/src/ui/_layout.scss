@@ -178,10 +178,12 @@ dl {
 			padding: calc( #{$spacer} * 0.5 );
 			background: var(--layout-background);
 			border-radius: var(--element-border-radius);
-			border: 1px solid var(--color-border);
+			border: var(--element-border-width) solid var(--color-border);
+			box-shadow: $shadow;
 		}
 
 		&__card {
+			position: relative;
 			display: flex;
 			justify-content: center;
 			align-items: center;
@@ -194,6 +196,32 @@ dl {
 			box-shadow: $shadow;
 			overflow: hidden;
 
+			img {
+				width: $gutter * 4;
+				height: $gutter * 4;
+			}
+
+			&:before {
+				content: '';
+				position: absolute;
+				z-index: 1;
+				width: calc( ( #{$gutter} * 6 ) - ( var(--element-border-width) * 2 ) );
+				height: calc( ( #{$gutter} * 6 ) - ( var(--element-border-width) * 2 ) );
+				border: var(--element-border-width) solid var(--color-border);
+				border-radius: var(--element-border-radius);
+			}
+
+			&:after {
+				content: '';
+				position: absolute;
+				z-index: 2;
+				width: calc( ( #{$gutter} * 6 ) - ( var(--game-card-border-width) * 2 ) );
+				height: calc( ( #{$gutter} * 6 ) - ( var(--game-card-border-width) * 2 ) );
+				border: var(--game-card-border-width) solid var(--game-card-border-color);
+				border-radius: var(--element-border-radius);
+				opacity: 0.5;
+			}
+
 			span {
 				display: flex;
 				justify-content: center;
@@ -205,25 +233,33 @@ dl {
 			}
 
 			&.is-active {
-				span {
+				span,
+				img {
 					visibility: visible;
 				}
 
+				&:after {
+					border-color: var(--game-card-border-color-active);
+				}
+
 				&.is-match {
-					span {
+					span,
+					&:after {
 						border-color: var(--game-card-border-color-match);
 					}
 				}
 	
 				&.is-not-match {
-					span {
+					span,
+					&:after {
 						border-color: var(--color-warning);
 					}
 				}
 			}
 
 			&.is-open {
-				span {
+				span,
+				&:after {
 					visibility: visible;
 					border-color: transparent;
 				}
@@ -232,7 +268,8 @@ dl {
 			&:not(.is-open, .is-active) {
 				background: var(--game-card-backface);
 
-				span {
+				span,
+				img {
 					visibility: hidden;
 				}
 			}
@@ -251,28 +288,28 @@ dl {
 			// TEMP
 
 			&-type-1 {
-				background: #def;
+				background: #F6F3F2;
 			}
 			&-type-2 {
-				background: #dfe;
+				background: #F4F5F7;
 			}
 			&-type-3 {
-				background: #efd;
+				background: #F4F5F7;
 			}
 			&-type-4 {
-				background: #edf;
+				background: #F4F5F1;
 			}
 			&-type-5 {
-				background: #fde;
+				background: #F6F3F1;
 			}
 			&-type-6 {
-				background: #fed;
+				background: #F3F3F9;
 			}
 			&-type-7 {
-				background: #acf;
+				background: #F5F2EB;
 			}
 			&-type-8 {
-				background: #caf;
+				background: #EEEFEC;
 			}
 		}
 	}
