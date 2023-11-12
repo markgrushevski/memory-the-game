@@ -135,6 +135,8 @@ dl {
 				}
 	
 				&-name {
+					@include font-headings();
+
 					font-size: 1.5rem;
 				}
 		
@@ -203,8 +205,6 @@ dl {
 			}
 
 			&.is-active {
-				border-color: #f00;
-
 				span {
 					visibility: visible;
 				}
