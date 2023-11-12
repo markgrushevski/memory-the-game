@@ -18,8 +18,6 @@ function closeAllModals() {
     showHelpModal.value = false;
 }
 
-const time = useDateFormat(gameStore.gameTime, 'mm:ss');
-
 const playerName = ref('');
 const playerDifficulty = ref('easy');
 const playerQuantity = ref(16);
@@ -48,7 +46,7 @@ watch(
             }, 1000);
         }
 
-        if (selectedCards.value.length === openedCards.value.length) {
+        if (cardsStore.cards.length === openedCards.value.length) {
             gameStore.createGame();
             showEndGameModal.value = true;
         }
@@ -150,7 +148,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                                 d="M12,6a1,1,0,0,0-1,1v4.325L7.629,13.437a1,1,0,0,0,1.062,1.7l3.84-2.4A1,1,0,0,0,13,11.879V7A1,1,0,0,0,12,6Z"
                             />
                         </svg>
-                        <span>{{ time }}</span>
+                        <span>{{ useDateFormat(gameStore.gameTime, 'mm:ss').value }}</span>
                     </div>
                 </div>
                 <main>
@@ -188,7 +186,13 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
         <div class="memo-modal__container">
             <div class="memo-modal__header">Начать новую игру</div>
             <div class="memo-modal__content">
-                <form class="start-new-game-form">
+                <form
+                    class="start-new-game-form"
+                    @submit.prevent="
+                        gameStore.initGame([playerName], playerDifficulty, playerQuantity);
+                        showNewGameModal = false;
+                    "
+                >
                     <label for="name">Имя:</label>
                     <input v-model="playerName" required class="memo__input" type="text" name="name" />
 
@@ -203,10 +207,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                         class="memo-button button-restart"
                         aria-label="Начать новую игру"
                         title="Начать новую игру"
-                        @click="
-                            gameStore.initGame([playerName], playerDifficulty, playerQuantity);
-                            showNewGameModal = false;
-                        "
+                        type="submit"
                     >
                         Начать новую игру
                     </button>

@@ -19,6 +19,8 @@ export const useGameStore = defineStore('game', () => {
      * @param {import('@/main').Quantity} quantity
      *  */
     function initGame(playerNameList, difficulty, quantity) {
+        $reset();
+
         for (const playerName of playerNameList) {
             playersStore.createPlayer(playerName);
         }
@@ -32,7 +34,7 @@ export const useGameStore = defineStore('game', () => {
         playersStore.fetchPlayers();
 
         intervalId.value = setInterval(() => {
-            gameTime.value -= 1;
+            gameTime.value = gameTime.value - 1;
         }, 1000);
     }
 
@@ -42,7 +44,20 @@ export const useGameStore = defineStore('game', () => {
             history: historyStore.history,
             players: playersStore.players
         };
+
+        console.dir(game.value);
     }
 
-    return { game, initGame, createGame, gameTime };
+    function $reset() {
+        game.value = null;
+        gameTime.value = 0;
+        clearInterval(intervalId.value);
+        selectedDifficulty.value = 'easy';
+
+        historyStore.$reset();
+        playersStore.$reset();
+        cardsStore.$reset();
+    }
+
+    return { game, initGame, createGame, gameTime, $reset };
 });

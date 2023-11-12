@@ -8,5 +8,9 @@ export const useHistoryStore = defineStore('history', () => {
         history.value.steps.push({ match: isMatch, player, openedCards });
     }
 
-    return { history, makeHistoryStep };
+    function $reset() {
+        history.value = { steps: [] };
+    }
+
+    return { history, makeHistoryStep, $reset };
 });

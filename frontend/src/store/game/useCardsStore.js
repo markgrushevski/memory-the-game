@@ -22,5 +22,9 @@ export const useCardsStore = defineStore('cards', () => {
             });
     }
 
-    return { cards, cardsQuantity, fetchCards };
+    function $reset() {
+        cardsQuantity.value = 16;
+    }
+
+    return { cards, cardsQuantity, fetchCards, $reset };
 });
