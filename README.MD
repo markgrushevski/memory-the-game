@@ -25,17 +25,20 @@ Backend: Python, Django, Postgresql, API, poetry
 ### Инструкция по игре
 
 1. Зайти на сайт проекта: [Memory Game](https://memory-27.vercel.app/)
-2. Выбрать размер поля.
-3. Начать игру, открывая карточки по очереди.
-![Field](https://github.com/markgrushevski/Team27/blob/main/backend/demonstration/3.png?raw=true)
+2. Выбрать имя игрока и сложность.
+![Form](https://github.com/markgrushevski/Team27/blob/main/backend/demonstration/3.png?raw=true)
 
-4. При обнаружении пары, они окрасятся в зелёный цвет и останутся открытыми.
+3. Нажать кропку "Начать новую игру"
+4. Начать игру, открывая карточки по очереди.
+![Field](https://github.com/markgrushevski/Team27/blob/main/backend/demonstration/6.png?raw=true)
+
+5. При обнаружении пары, они останутся открытыми.
 ![Correct](https://github.com/markgrushevski/Team27/blob/main/backend/demonstration/1.png?raw=true)
 
-5. Если карточки не совпадают, они окрасятся в красный и закроются.
+6. Если карточки не совпадают, они окрасятся в красный и закроются.
 ![Incorrect](https://github.com/markgrushevski/Team27/blob/main/backend/demonstration/2.png?raw=true)
 
-6. Открыть все карточки для завершения игры.
+7. Открыть все карточки для завершения игры.
 
 ## Инструкция по локальной развёртке
 
