@@ -184,7 +184,6 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                 </main>
             </div>
         </section>-->
-        </section>
 
     </div>
 
