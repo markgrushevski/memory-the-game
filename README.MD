@@ -5,9 +5,12 @@
 - Алексей @amrylnikov - бекэнд
 - Кирилл @KKorolevDev - дизайн
 
-(обязательно ссылка на фигму (для дизайнеров) и любые другие дизайнерские артефакты по желанию;)
-
 ## Проект
+
+### Стек
+
+Frontend: HTML/CSS, Vue, Scss, vite, prettier, JS, UI/UX-дизайн
+Backend: Python, Django, Postgresql, API, poetry
 
 ### Реализованные фичи + скрины
 
@@ -42,7 +45,7 @@
 2. Запускаем консоль для сервера бэкэнда
 3. Из папки бэкенда устанавливаем зависимости и запускаем командой:
     ```sh
-    pip install --upgrade poetry && poetry build && poetry install && python manage.py runserver 8888
+    pip install --upgrade poetry && poetry build && poetry install && python3 manage.py runserver 8888
     ```
 4. Запускаем вторую консоль для сервера фронтенда
 5. Из папки фронтенда устанавливаем зависимости и запускаем командой: 
