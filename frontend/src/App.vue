@@ -26,6 +26,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
     .then(({ data }) => {
         console.log(data.value);
     }); */
+
 </script>
 
 <template>
@@ -243,7 +244,44 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                 </main>
             </div>
         </section>
+
     </div>
+
+    <section class="memo-modal memo-modal-start">
+        <div class="memo-modal__container">
+            <div class="memo-modal__header">
+                Начать новую игру
+            </div>
+            <div class="memo-modal__content">
+                <button class="button-icon button-restart" type="submit" aria-label="Начать новую игру" title="Начать новую игру">
+                    Начать новую игру 
+                </button>
+            </div>
+            <div class="memo-modal__close">
+                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="24" height="24">
+                    <path d="m16.707,8.707l-3.293,3.293,3.293,3.293-1.414,1.414-3.293-3.293-3.293,3.293-1.414-1.414,3.293-3.293-3.293-3.293,1.414-1.414,3.293,3.293,3.293-3.293,1.414,1.414Zm7.293,3.293c0,6.617-5.383,12-12,12S0,18.617,0,12,5.383,0,12,0s12,5.383,12,12Zm-2,0c0-5.514-4.486-10-10-10S2,6.486,2,12s4.486,10,10,10,10-4.486,10-10Z"/>
+                </svg>
+            </div>
+        </div>
+        <div class="memo-modal__overlay"></div>
+    </section>
+
+    <section class="memo-modal memo-modal-end">
+        <div class="memo-modal__container">
+            <div class="memo-modal__header">
+                Результаты
+            </div>
+            <div class="memo-modal__content">
+                Modal end
+            </div>
+            <div class="memo-modal__close">
+            <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="24" height="24">
+                <path d="m16.707,8.707l-3.293,3.293,3.293,3.293-1.414,1.414-3.293-3.293-3.293,3.293-1.414-1.414,3.293-3.293-3.293-3.293,1.414-1.414,3.293,3.293,3.293-3.293,1.414,1.414Zm7.293,3.293c0,6.617-5.383,12-12,12S0,18.617,0,12,5.383,0,12,0s12,5.383,12,12Zm-2,0c0-5.514-4.486-10-10-10S2,6.486,2,12s4.486,10,10,10,10-4.486,10-10Z"/>
+            </svg>
+        </div>
+        </div>
+        <div class="memo-modal__overlay"></div>
+    </section>
 </template>
 
 <style lang="scss">
