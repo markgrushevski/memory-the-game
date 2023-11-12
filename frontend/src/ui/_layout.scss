@@ -37,6 +37,12 @@ dl {
     margin-bottom: $paragraph-margin-bottom;
 }
 
+input, select {
+	padding: $spacer * 0.5 $spacer;
+	border-radius: var(--element-border-radius);
+	border: var(--element-border-width) solid var(--color-border);
+}
+
 .container {
     @include container;
 }
@@ -333,7 +339,26 @@ dl {
 	align-items: center;
 
 	&-start {
-		display: none;
+		display: flex;
+
+		.start-new-game-form {
+			display: flex;
+			flex-direction: column;
+
+			label {
+				margin-bottom: $spacer * 0.25;
+
+				&:not(:first-child) {
+					margin-top: $spacer;
+				}
+			}
+
+			button {
+				&:not(:first-child) {
+					margin-top: $spacer * 2;
+				}
+			}
+		}
 	}
 
 	&-end {

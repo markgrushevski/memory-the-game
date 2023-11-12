@@ -193,21 +193,21 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                 Начать новую игру
             </div>
             <div class="memo-modal__content">
-                <form>
-                    <label for="name">Ваше имя:</label>
+                <form class="start-new-game-form">
+                    <label for="name">Имя:</label>
                     <input required class="memo__input" type="text" value="" name="name">
 
-                    <label for="difficulty">Выберите уровень сложности:</label>
+                    <label for="difficulty">Уровень сложности:</label>
                     <select required id="difficulty" name="difficulty">
                         <option value="easy">Легкий</option>
                         <option value="medium">Средний</option>
                         <option value="hard">Трудный</option>
                     </select>
-                </form>
 
-                <button class="button-icon button-restart" type="submit" aria-label="Начать новую игру" title="Начать новую игру">
-                    Начать новую игру 
-                </button>
+                    <button class="memo-button button-restart" type="submit" aria-label="Начать новую игру" title="Начать новую игру">
+                        Начать новую игру
+                    </button>
+                </form>
             </div>
             <div class="memo-modal__close">
                 <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="24" height="24">
