@@ -71,6 +71,12 @@ dl {
                 width: 100%;
                 height: 100%;
             }
+
+			svg {
+				path {
+					fill: var(--color-primary);
+				}
+			}
         }
 
 		&__buttons {
@@ -100,7 +106,7 @@ dl {
 
 		&__moves {
 			display: flex;
-			justify-content: center;
+			margin-left: $spacer;
 			align-items: center;
 			font-size: $font-size-h6;
 
@@ -121,14 +127,15 @@ dl {
 			justify-self: center;
 	
 			&-player {
-				color: var(--color-mute);
+				color: var(--color-primary);
+				opacity: 0.5;
 	
 				&.is-active {
-					color: var(--color-primary);
+					opacity: 1;
 				}
 	
 				&-name {
-					font-size: $font-size-h4;
+					font-size: 1.5rem;
 				}
 		
 				&:not(:first-child) {
@@ -140,8 +147,9 @@ dl {
 
 		&__time {
 			display: flex;
-			justify-content: center;
+			justify-content: flex-end;
 			align-items: center;
+			margin-right: $spacer;
 			font-size: $font-size-h6;
 
 			svg {
