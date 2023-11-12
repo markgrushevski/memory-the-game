@@ -13,17 +13,17 @@
 }
 
 @mixin button($padding: auto) {
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	text-decoration: none;
-	color: var(--button-color);
-	background: var(--button-background);
-	border: none;
-	border-radius: var(--element-border-radius);
-	cursor: pointer;
-	transition: $transition;
-	box-shadow: $shadow;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: $transition;
+    border: none;
+    border-radius: var(--element-border-radius);
+    background: var(--button-background);
+    box-shadow: $shadow;
+    color: var(--button-color);
+    text-decoration: none;
+    cursor: pointer;
 
     @if $padding == auto {
         padding: $spacer $spacer * 1.5;
@@ -33,8 +33,8 @@
 }
 
 @mixin button-hover() {
-	background: var(--color-accent);
-	box-shadow: $shadow-hover;
+    background: var(--color-accent);
+    box-shadow: $shadow-hover;
 }
 
 @mixin button-icon($padding: auto) {

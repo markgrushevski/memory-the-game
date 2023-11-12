@@ -8,6 +8,8 @@ export const useGameStore = defineStore('game', () => {
     const cardsStore = useCardsStore();
 
     const game = ref(/** @type {import('@/main').Game} */ (null));
+    const gameTime = ref(0);
+    const intervalId = ref(null);
 
     const selectedDifficulty = ref(/** @type {import('@/main').Difficulty} */ ('easy'));
 
@@ -22,8 +24,16 @@ export const useGameStore = defineStore('game', () => {
         }
 
         selectedDifficulty.value = difficulty;
-
         cardsStore.cardsQuantity = quantity;
+
+        gameTime.value = 1200000;
+
+        cardsStore.fetchCards();
+        playersStore.fetchPlayers();
+
+        intervalId.value = setInterval(() => {
+            gameTime.value -= 1;
+        }, 1000);
     }
 
     function createGame() {
@@ -34,5 +44,5 @@ export const useGameStore = defineStore('game', () => {
         };
     }
 
-    return { game, initGame, createGame };
+    return { game, initGame, createGame, gameTime };
 });

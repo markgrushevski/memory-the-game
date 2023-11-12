@@ -1,19 +1,35 @@
 <script setup>
 import { useCardsStore, useGameStore, useHistoryStore, usePlayersStore } from '@store';
-import { computed, onBeforeMount, ref, watch } from 'vue';
+import { useDateFormat } from '@vueuse/core';
+import { computed, ref, watch } from 'vue';
 
 const gameStore = useGameStore();
 const historyStore = useHistoryStore();
 const playersStore = usePlayersStore();
 const cardsStore = useCardsStore();
 
+const showNewGameModal = ref(true);
+const showEndGameModal = ref(false);
+const showHelpModal = ref(false);
+
+function closeAllModals() {
+    showNewGameModal.value = false;
+    showEndGameModal.value = false;
+    showHelpModal.value = false;
+}
+
+const time = useDateFormat(gameStore.gameTime, 'mm:ss');
+
+const playerName = ref('');
+const playerDifficulty = ref('easy');
+const playerQuantity = ref(16);
+
+const openedCards = ref(/** @type {import('@/main').Card[]} */ []);
 const selectedCards = ref(/** @type {[import('@/main').Card, import('@/main').Card]} */ ([]));
 
 const field = ref(/** @type {HTMLElement | null} */ (null));
 
-const getImagePath = computed(() => (url) => {
-    return new URL(`./ui/img/${url}`, import.meta.url).href;
-});
+const getImagePath = computed(() => (url) => new URL(`./ui/img/${url}`, import.meta.url).href);
 
 watch(
     () => selectedCards.value,
@@ -21,35 +37,24 @@ watch(
         if (selectedCards.value.length === 2) {
             field.value.style.pointerEvents = 'none';
 
-            const element1 = () => document.getElementById(`cardId-${selectedCards.value[0].cardId}`);
-            const element2 = () => document.getElementById(`cardId-${selectedCards.value[1].cardId}`);
-
-            if (selectedCards.value[0].url === selectedCards.value[1].url) {
-                element1().classList.add('is-open', 'is-match');
-                element2().classList.add('is-open', 'is-match');
-            } else {
-                element1().classList.add('is-not-match');
-                element2().classList.add('is-not-match');
+            if (selectedCards.value[0].id === selectedCards.value[1].id) {
+                openedCards.value.push(selectedCards.value[0]);
+                openedCards.value.push(selectedCards.value[1]);
             }
 
             setTimeout(() => {
-                element1().classList.remove('is-match', 'is-not-match');
-                element2().classList.remove('is-match', 'is-not-match');
-
                 selectedCards.value.length = 0;
-
                 field.value.style.pointerEvents = 'auto';
             }, 1000);
+        }
+
+        if (selectedCards.value.length === openedCards.value.length) {
+            gameStore.createGame();
+            showEndGameModal.value = true;
         }
     },
     { deep: true }
 );
-
-onBeforeMount(() => {
-    gameStore.initGame(['Max'], 'medium', 16);
-    cardsStore.fetchCards();
-    playersStore.fetchPlayers();
-});
 
 /* useFetch('https://django-api-eodw.onrender.com/api/items/3/')
     .put(JSON.stringify({ name: 'PUT', description: 'меняю третий' }), 'application/json')
@@ -64,7 +69,6 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
     .then(({ data }) => {
         console.log(data.value);
     }); */
-
 </script>
 
 <template>
@@ -79,7 +83,12 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                     </svg>
                 </div>
                 <div class="memo-header__buttons">
-                    <button class="button-icon button-help" aria-label="Правила игры" title="Правила игры">
+                    <button
+                        class="button-icon button-help"
+                        aria-label="Правила игры"
+                        title="Правила игры"
+                        @click="showHelpModal = true"
+                    >
                         <svg id="Outline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path
                                 d="M12,0A12,12,0,1,0,24,12,12.013,12.013,0,0,0,12,0Zm0,22A10,10,0,1,1,22,12,10.011,10.011,0,0,1,12,22Z"
@@ -90,7 +99,12 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                             <rect x="11" y="17" width="2" height="2" rx="1" />
                         </svg>
                     </button>
-                    <button class="button-icon button-restart" aria-label="Начать новую игру" title="Начать новую игру">
+                    <button
+                        class="button-icon button-restart"
+                        aria-label="Начать новую игру"
+                        title="Начать новую игру"
+                        @click="showNewGameModal = true"
+                    >
                         <svg id="Outline" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                             <path
                                 d="M21.962,12.875A10.03,10.03,0,1,1,19.122,5H16a1,1,0,0,0-1,1h0a1,1,0,0,0,1,1h4.143A1.858,1.858,0,0,0,22,5.143V1a1,1,0,0,0-1-1h0a1,1,0,0,0-1,1V3.078A11.985,11.985,0,1,0,23.95,13.1a1.007,1.007,0,0,0-1-1.1h0A.982.982,0,0,0,21.962,12.875Z"
@@ -120,10 +134,11 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                         <div
                             v-for="player in playersStore.currentPlayers"
                             :key="player"
-                            class="memo-score__players-player is-active"
+                            class="memo-score__players-player"
+                            :class="{ 'is-active': playersStore.currentPlayers[playersStore.turnIndex] === player }"
                         >
                             <div class="memo-score__players-player-name">{{ player.name }}</div>
-                            <!--<div>{{ player.score }}</div>-->
+                            <div>{{ player.score }}</div>
                         </div>
                     </div>
                     <div class="memo-score__time">
@@ -135,7 +150,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                                 d="M12,6a1,1,0,0,0-1,1v4.325L7.629,13.437a1,1,0,0,0,1.062,1.7l3.84-2.4A1,1,0,0,0,13,11.879V7A1,1,0,0,0,12,6Z"
                             />
                         </svg>
-                        <span>2:32</span>
+                        <span>{{ time }}</span>
                     </div>
                 </div>
                 <main>
@@ -147,9 +162,18 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                                 :key="card.cardId"
                                 class="memo-board__card memo-board__card-type-1"
                                 :class="{
-                                    'is-active': selectedCards.find((_card) => _card.cardId === card.cardId)
+                                    'is-active': selectedCards.find((_card) => _card.cardId === card.cardId),
+                                    'is-match':
+                                        selectedCards.length === 2 && selectedCards[0].id === selectedCards[1].id,
+                                    'is-not-match':
+                                        selectedCards.length === 2 && selectedCards[0].id !== selectedCards[1].id,
+                                    'is-open': openedCards.find((_card) => _card.cardId === card.cardId)
                                 }"
-                                @click="selectedCards.push(card)"
+                                @click="
+                                    () => {
+                                        selectedCards.push(card);
+                                    }
+                                "
                             >
                                 <img :src="getImagePath(card.url)" alt="" />
                             </div>
@@ -158,88 +182,79 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                 </main>
             </div>
         </section>
-
-        <!--<section class="memo" style="position: absolute; top: 75%; margin-top: 600px; opacity: 0.75">
-            <h1 class="logo">Тестирую отрисовку карточек</h1>
-            <h2 class="logo">Игрок: {{ playersStore.currentPlayers[playersStore.turnIndex].name }}</h2>
-            <h3 class="logo">Очки: {{ playersStore.currentPlayers[playersStore.turnIndex].score }}</h3>
-            <div class="memo-content">
-                <main>
-                    <div class="memo-board">
-                        <div class="memo-board-inner">
-                            <div
-                                v-for="card in cardsStore.cards"
-                                :key="card"
-                                class="memo-board__card"
-                                @click="
-                                    (ev) => {
-                                        ev.target.classList.add('is-active');
-                                    }
-                                "
-                            >
-                                <span>{{ card.id }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </main>
-            </div>
-        </section>-->
-
     </div>
 
-    <section class="memo-modal memo-modal-start">
+    <section v-if="showNewGameModal" class="memo-modal memo-modal-start">
         <div class="memo-modal__container">
-            <div class="memo-modal__header">
-                Начать новую игру
-            </div>
+            <div class="memo-modal__header">Начать новую игру</div>
             <div class="memo-modal__content">
                 <form class="start-new-game-form">
                     <label for="name">Имя:</label>
-                    <input required class="memo__input" type="text" value="" name="name">
+                    <input v-model="playerName" required class="memo__input" type="text" name="name" />
 
                     <label for="difficulty">Уровень сложности:</label>
-                    <select required id="difficulty" name="difficulty">
+                    <select id="difficulty" v-model="playerDifficulty" required name="difficulty">
                         <option value="easy">Легкий</option>
                         <option value="medium">Средний</option>
                         <option value="hard">Трудный</option>
                     </select>
 
-                    <button class="memo-button button-restart" type="submit" aria-label="Начать новую игру" title="Начать новую игру">
+                    <button
+                        class="memo-button button-restart"
+                        aria-label="Начать новую игру"
+                        title="Начать новую игру"
+                        @click="
+                            gameStore.initGame([playerName], playerDifficulty, playerQuantity);
+                            showNewGameModal = false;
+                        "
+                    >
                         Начать новую игру
                     </button>
                 </form>
             </div>
-            <div class="memo-modal__close">
-                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="m16.707,8.707l-3.293,3.293,3.293,3.293-1.414,1.414-3.293-3.293-3.293,3.293-1.414-1.414,3.293-3.293-3.293-3.293,1.414-1.414,3.293,3.293,3.293-3.293,1.414,1.414Zm7.293,3.293c0,6.617-5.383,12-12,12S0,18.617,0,12,5.383,0,12,0s12,5.383,12,12Zm-2,0c0-5.514-4.486-10-10-10S2,6.486,2,12s4.486,10,10,10,10-4.486,10-10Z"/>
+            <div class="memo-modal__close" @click="showNewGameModal = false">
+                <svg
+                    id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    data-name="Layer 1"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                >
+                    <path
+                        d="m16.707,8.707l-3.293,3.293,3.293,3.293-1.414,1.414-3.293-3.293-3.293,3.293-1.414-1.414,3.293-3.293-3.293-3.293,1.414-1.414,3.293,3.293,3.293-3.293,1.414,1.414Zm7.293,3.293c0,6.617-5.383,12-12,12S0,18.617,0,12,5.383,0,12,0s12,5.383,12,12Zm-2,0c0-5.514-4.486-10-10-10S2,6.486,2,12s4.486,10,10,10,10-4.486,10-10Z"
+                    />
                 </svg>
             </div>
         </div>
-        <div class="memo-modal__overlay"></div>
+        <div class="memo-modal__overlay" @click.self="closeAllModals"></div>
     </section>
 
-    <section class="memo-modal memo-modal-end">
+    <section v-if="showEndGameModal" class="memo-modal memo-modal-end">
         <div class="memo-modal__container">
-            <div class="memo-modal__header">
-                Результаты
-            </div>
-            <div class="memo-modal__content">
-                Modal end
-            </div>
+            <div class="memo-modal__header">Результаты</div>
+            <div class="memo-modal__content">Modal end</div>
             <div class="memo-modal__close">
-                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="m16.707,8.707l-3.293,3.293,3.293,3.293-1.414,1.414-3.293-3.293-3.293,3.293-1.414-1.414,3.293-3.293-3.293-3.293,1.414-1.414,3.293,3.293,3.293-3.293,1.414,1.414Zm7.293,3.293c0,6.617-5.383,12-12,12S0,18.617,0,12,5.383,0,12,0s12,5.383,12,12Zm-2,0c0-5.514-4.486-10-10-10S2,6.486,2,12s4.486,10,10,10,10-4.486,10-10Z"/>
+                <svg
+                    id="Layer_1"
+                    xmlns="http://www.w3.org/2000/svg"
+                    data-name="Layer 1"
+                    viewBox="0 0 24 24"
+                    width="24"
+                    height="24"
+                >
+                    <path
+                        d="m16.707,8.707l-3.293,3.293,3.293,3.293-1.414,1.414-3.293-3.293-3.293,3.293-1.414-1.414,3.293-3.293-3.293-3.293,1.414-1.414,3.293,3.293,3.293-3.293,1.414,1.414Zm7.293,3.293c0,6.617-5.383,12-12,12S0,18.617,0,12,5.383,0,12,0s12,5.383,12,12Zm-2,0c0-5.514-4.486-10-10-10S2,6.486,2,12s4.486,10,10,10,10-4.486,10-10Z"
+                    />
                 </svg>
             </div>
         </div>
-        <div class="memo-modal__overlay"></div>
+        <div class="memo-modal__overlay" @click.self="closeAllModals"></div>
     </section>
 
-    <section class="memo-modal memo-modal-help">
+    <section v-if="showHelpModal" class="memo-modal memo-modal-help">
         <div class="memo-modal__container">
-            <div class="memo-modal__header">
-                Правила игры
-            </div>
+            <div class="memo-modal__header">Правила игры</div>
             <div class="memo-modal__content">
                 <h2>Цель игры:</h2>
 
@@ -271,13 +286,8 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
 
                 <h2>Удачи и приятной игры!</h2>
             </div>
-            <div class="memo-modal__close">
-                <svg xmlns="http://www.w3.org/2000/svg" id="Layer_1" data-name="Layer 1" viewBox="0 0 24 24" width="24" height="24">
-                    <path d="m16.707,8.707l-3.293,3.293,3.293,3.293-1.414,1.414-3.293-3.293-3.293,3.293-1.414-1.414,3.293-3.293-3.293-3.293,1.414-1.414,3.293,3.293,3.293-3.293,1.414,1.414Zm7.293,3.293c0,6.617-5.383,12-12,12S0,18.617,0,12,5.383,0,12,0s12,5.383,12,12Zm-2,0c0-5.514-4.486-10-10-10S2,6.486,2,12s4.486,10,10,10,10-4.486,10-10Z"/>
-                </svg>
-            </div>
         </div>
-        <div class="memo-modal__overlay"></div>
+        <div class="memo-modal__overlay" @click.self="closeAllModals"></div>
     </section>
 </template>
 
