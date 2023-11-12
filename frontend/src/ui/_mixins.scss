@@ -43,6 +43,8 @@
 	border-radius: var(--element-border-radius);
 	cursor: pointer;
 	transition: $transition;
+	min-width: 48px;
+	min-height: 48px;
 
 	@if $padding == auto {
 		padding: $spacer $spacer * 1.5;
