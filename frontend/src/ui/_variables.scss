@@ -1,36 +1,33 @@
 :root {
-	--page-container: 912px;
-	--page-content: 800px;
-	
-	--page-background: #EFE1CB;
-	--layout-background: #FEFDFA;
-	--color-primary: #3F2E2B;
-	--color-secondary: #6e6e6e;
-	--color-mute: #b1b1b1;
-	--color-accent: #CB623D;
-	--color-warning: #E75E50;
-	--color-border: #EED7B3;
-	--button-background: #3F2E2B;
-	--button-color: #ffffff;
-	
-	--font-family-base: 'Rubik', sans-serif;
-	--font-weight-base: 400;
-	--line-height-base: 1.4;
-	--font-family-headings: 'Rubik', sans-serif;
-	--font-weight-headings: 600;
-	--line-height-headings: 1.12;
-	
-	--element-border-width: 1px;
-	--image-border-radius: 4px;
-	--element-border-radius: 4px;
+    --page-container: 912px;
+    --page-content: 800px;
+    --page-background: #efe1cb;
+    --layout-background: #fefdfa;
+    --color-primary: #3f2e2b;
+    --color-secondary: #6e6e6e;
+    --color-mute: #b1b1b1;
+    --color-accent: #cb623d;
+    --color-warning: #e75e50;
+    --color-border: #eed7b3;
+    --button-background: #3f2e2b;
+    --button-color: #ffffff;
+    --font-family-base: 'Rubik', sans-serif;
+    --font-weight-base: 400;
+    --line-height-base: 1.4;
+    --font-family-headings: 'Rubik', sans-serif;
+    --font-weight-headings: 600;
+    --line-height-headings: 1.12;
+    --element-border-width: 1px;
+    --image-border-radius: 4px;
+    --element-border-radius: 4px;
 
-	// Game Field
-	--game-cards: 8;
-	--game-card-border-width: 4px;
-	--game-card-backface: #F3E8D6;
-	--game-card-border-color: #F3E8D6;
-	--game-card-border-color-active: #E8B462;
-	--game-card-border-color-match: #5D7C42;
+    // Game Field
+    --game-cards: 8;
+    --game-card-border-width: 4px;
+    --game-card-backface: #f3e8d6;
+    --game-card-border-color: #f3e8d6;
+    --game-card-border-color-active: #e8b462;
+    --game-card-border-color-match: #5d7c42;
 }
 
 // Spacing
@@ -51,6 +48,6 @@ $font-size-base: 1rem;
 
 // Misc
 $transition: 0.2s;
-$shadow: 0 0 16px 0 rgba(0, 0, 0, 0.05);
-$shadow-hover: 0 0 16px 0 rgba(0, 0, 0, 0.1);
-$shadow-hover-deep: 0 0 16px 0 rgba(0, 0, 0, 0.35);
+$shadow: 0 0 16px 0 rgb(0 0 0 / 5%);
+$shadow-hover: 0 0 16px 0 rgb(0 0 0 / 10%);
+$shadow-hover-deep: 0 0 16px 0 rgb(0 0 0 / 35%);

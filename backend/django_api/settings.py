@@ -1,13 +1,12 @@
 import os
 
 from pathlib import Path
-from dotenv import load_dotenv
 import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-load_dotenv()
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY='django-insecure-a!^0u+la0!6lo=s2$@pno9=#ikujl!0y_u08whp59$2m+m*_^!'
+DATABASE_URL='postgres://hackathon_xqjx_user:maW8df7fWjdrS6hrUcwK1M8wGarfW3Ll@dpg-cl6b6e1k857s73cqlgsg-a.frankfurt-postgres.render.com/hackathon_xqjx'
 
 DEBUG = True
 
@@ -65,7 +64,7 @@ WSGI_APPLICATION = 'django_api.wsgi.application'
 CORS_ORIGIN_ALLOW_ALL = True
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get('DATABASE_URL'), conn_max_age=600),    
+    'default': dj_database_url.parse(DATABASE_URL, conn_max_age=600),    
     # 'default': {
     #     'ENGINE': 'django.db.backends.sqlite3',
     #     'NAME': BASE_DIR / 'db.sqlite3',

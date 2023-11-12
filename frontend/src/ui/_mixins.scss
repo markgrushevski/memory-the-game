@@ -25,11 +25,11 @@
 	transition: $transition;
 	box-shadow: $shadow;
 
-	@if $padding == auto {
-		padding: $spacer $spacer * 1.5;
-	} @else {
-		padding: $padding;
-	}
+    @if $padding == auto {
+        padding: $spacer $spacer * 1.5;
+    } @else {
+        padding: $padding;
+    }
 }
 
 @mixin button-hover() {
@@ -38,37 +38,37 @@
 }
 
 @mixin button-icon($padding: auto) {
-	display: inline-flex;
-	justify-content: center;
-	align-items: center;
-	text-decoration: none;
-	border: none;
-	border-radius: var(--element-border-radius);
-	cursor: pointer;
-	transition: $transition;
-	min-width: 48px;
-	min-height: 48px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+    min-height: 48px;
+    transition: $transition;
+    border: none;
+    border-radius: var(--element-border-radius);
+    text-decoration: none;
+    cursor: pointer;
 
-	@if $padding == auto {
-		padding: $spacer $spacer * 1.5;
-	} @else {
-		padding: $padding;
-	}
+    @if $padding == auto {
+        padding: $spacer $spacer * 1.5;
+    } @else {
+        padding: $padding;
+    }
 
-	svg {
-		transition: $transition;
-		fill: var(--color-primary);
-	}
+    svg {
+        transition: $transition;
+        fill: var(--color-primary);
+    }
 }
 
 @mixin button-icon-hover() {
-	svg {
-		fill: var(--color-accent);
-	}
+    svg {
+        fill: var(--color-accent);
+    }
 }
 
 @mixin font-headings() {
-	font-family: var(--font-family-headings);
-	font-weight: var(--font-weight-headings);
-	line-height: var(--line-height-headings);
+    font-family: var(--font-family-headings);
+    font-weight: var(--font-weight-headings);
+    line-height: var(--line-height-headings);
 }

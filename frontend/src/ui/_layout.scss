@@ -42,29 +42,27 @@ dl {
 }
 
 .button-icon {
-	@include button-icon(
-		$padding: $spacer * 0.5
-	);
+    @include button-icon($padding: $spacer * 0.5);
+    background: transparent;
 
-	font-size: 1.5rem;
-	background: transparent;
+    font-size: 1.5rem;
 
-	&:hover {
-		@include button-icon-hover();
-	}
+    &:hover {
+        @include button-icon-hover;
+    }
 }
 
 .memo {
     display: flex;
     flex-direction: column;
-	max-width: var(--page-container);
+    max-width: var(--page-container);
     margin: $spacer * 2 auto;
     gap: $spacer;
 
     &-header {
         display: flex;
+        align-items: center;
         justify-content: space-between;
-		align-items: center;
 
         .logo {
             img {
@@ -72,247 +70,255 @@ dl {
                 height: 100%;
             }
 
-			svg {
-				path {
-					fill: var(--color-primary);
-				}
-			}
+            svg {
+                path {
+                    fill: var(--color-primary);
+                }
+            }
         }
 
-		&__buttons {
-			display: flex;
-			align-items: center;
-			gap: $spacer * 0.5;
-		}
+        &__buttons {
+            display: flex;
+            align-items: center;
+            gap: $spacer * 0.5;
+        }
 
-		&:not(:last-child) {
-			padding-bottom: $spacer * 2; 
-			border-bottom: 1px solid var(--color-border);
-		}
+        &:not(:last-child) {
+            padding-bottom: $spacer * 2;
+            border-bottom: 1px solid var(--color-border);
+        }
     }
 
-	&-content {
-		display: flex;
-		flex-direction: column;
-		gap: $spacer;
-		margin: 0 auto;
-	}
+    &-content {
+        display: flex;
+        flex-direction: column;
+        gap: $spacer;
+        margin: 0 auto;
+    }
 
-	&-score {
-		display: grid;
-		grid-template-columns: 100px 1fr 100px;
-		width: 100%;
-		gap: $spacer;
+    &-score {
+        display: grid;
+        grid-template-columns: 100px 1fr 100px;
+        width: 100%;
+        gap: $spacer;
 
-		&__moves {
-			display: flex;
-			margin-left: $spacer;
-			align-items: center;
-			font-size: $font-size-h6;
+        &__moves {
+            display: flex;
+            align-items: center;
+            margin-left: $spacer;
+            font-size: $font-size-h6;
 
-			svg {
-				font-size: $spacer;
-			}
+            svg {
+                font-size: $spacer;
+            }
 
-			span {
-				&:not(:first-child) {
-					margin-left: $spacer * 0.5;
-				}
-			}
-		}
+            span {
+                &:not(:first-child) {
+                    margin-left: $spacer * 0.5;
+                }
+            }
+        }
 
-		&__players {
-			display: flex;
-			gap: $spacer;
-			justify-self: center;
-	
-			&-player {
-				color: var(--color-primary);
-				opacity: 0.5;
-	
-				&.is-active {
-					opacity: 1;
-				}
-	
-				&-name {
-					@include font-headings();
+        &__players {
+            display: flex;
+            gap: $spacer;
+            justify-self: center;
 
-					font-size: 1.5rem;
-				}
-		
-				&:not(:first-child) {
-					padding-left: $spacer;
-					border-left: 1px solid var(--color-border);
-				}
-			}
-		}
+            &-player {
+                opacity: 0.5;
+                color: var(--color-primary);
 
-		&__time {
-			display: flex;
-			justify-content: flex-end;
-			align-items: center;
-			margin-right: $spacer;
-			font-size: $font-size-h6;
+                &.is-active {
+                    opacity: 1;
+                }
 
-			svg {
-				font-size: $spacer;
-			}
+                &-name {
+                    @include font-headings;
 
-			span {
-				&:not(:first-child) {
-					margin-left: $spacer * 0.5;
-				}
-			}
-		}
-	}
+                    font-size: 1.5rem;
+                }
 
+                &:not(:first-child) {
+                    padding-left: $spacer;
+                    border-left: 1px solid var(--color-border);
+                }
+            }
+        }
+
+        &__time {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            margin-right: $spacer;
+            font-size: $font-size-h6;
+
+            svg {
+                font-size: $spacer;
+            }
+
+            span {
+                &:not(:first-child) {
+                    margin-left: $spacer * 0.5;
+                }
+            }
+        }
+    }
 
     &-board {
         display: flex;
         justify-content: center;
 
-		&-inner {
-			display: flex;
-			flex-wrap: wrap;
-			width: calc( ( ( #{$gutter} * 6 ) + #{$spacer} ) * var(--game-cards) );
-			padding: calc( #{$spacer} * 0.5 );
-			background: var(--layout-background);
-			border-radius: var(--element-border-radius);
-			border: var(--element-border-width) solid var(--color-border);
-			box-shadow: $shadow;
-		}
+        &-inner {
+            display: flex;
+            flex-wrap: wrap;
+            width: calc(((#{$gutter} * 6) + #{$spacer}) * var(--game-cards));
+            padding: calc(#{$spacer} * 0.5);
+            border: var(--element-border-width) solid var(--color-border);
+            border-radius: var(--element-border-radius);
+            background: var(--layout-background);
+            box-shadow: $shadow;
+        }
 
-		&__card {
-			position: relative;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			width: $gutter * 6;
-			height: $gutter * 6;
-			margin: $spacer * 0.5;
-			cursor: pointer;
-			transition: $transition;
-			border-radius: var(--element-border-radius);
-			box-shadow: $shadow;
-			overflow: hidden;
+        &__card {
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+            width: $gutter * 6;
+            height: $gutter * 6;
+            margin: $spacer * 0.5;
+            overflow: hidden;
+            transition: $transition;
+            border-radius: var(--element-border-radius);
+            box-shadow: $shadow;
+            cursor: pointer;
 
-			img {
-				width: $gutter * 4;
-				height: $gutter * 4;
-			}
+            img {
+                width: $gutter * 4;
+                height: $gutter * 4;
+            }
 
-			&:before {
-				content: '';
-				position: absolute;
-				z-index: 1;
-				width: calc( ( #{$gutter} * 6 ) - ( var(--element-border-width) * 2 ) );
-				height: calc( ( #{$gutter} * 6 ) - ( var(--element-border-width) * 2 ) );
-				border: var(--element-border-width) solid var(--color-border);
-				border-radius: var(--element-border-radius);
-			}
+            &::before {
+                content: '';
+                position: absolute;
+                z-index: 1;
+                width: calc((#{$gutter} * 6) - (var(--element-border-width) * 2));
+                height: calc((#{$gutter} * 6) - (var(--element-border-width) * 2));
+                border: var(--element-border-width) solid var(--color-border);
+                border-radius: var(--element-border-radius);
+            }
 
-			&:after {
-				content: '';
-				position: absolute;
-				z-index: 2;
-				width: calc( ( #{$gutter} * 6 ) - ( var(--game-card-border-width) * 2 ) );
-				height: calc( ( #{$gutter} * 6 ) - ( var(--game-card-border-width) * 2 ) );
-				border: var(--game-card-border-width) solid var(--game-card-border-color);
-				border-radius: var(--element-border-radius);
-				opacity: 0.5;
-			}
+            &::after {
+                content: '';
+                position: absolute;
+                z-index: 2;
+                width: calc((#{$gutter} * 6) - (var(--game-card-border-width) * 2));
+                height: calc((#{$gutter} * 6) - (var(--game-card-border-width) * 2));
+                border: var(--game-card-border-width) solid var(--game-card-border-color);
+                border-radius: var(--element-border-radius);
+                opacity: 0.5;
+            }
 
-			span {
-				display: flex;
-				justify-content: center;
-				align-items: center;
-				width: calc( ( #{$gutter} * 6 ) - ( var(--game-card-border-width) * 2 ) );
-				height: calc( ( #{$gutter} * 6 ) - ( var(--game-card-border-width) * 2 ) );
-				border: var(--game-card-border-width) solid var(--game-card-border-color);
-				border-radius: var(--element-border-radius);
-			}
+            span {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: calc((#{$gutter} * 6) - (var(--game-card-border-width) * 2));
+                height: calc((#{$gutter} * 6) - (var(--game-card-border-width) * 2));
+                border: var(--game-card-border-width) solid var(--game-card-border-color);
+                border-radius: var(--element-border-radius);
+            }
 
-			&.is-active {
-				span,
-				img {
-					visibility: visible;
-				}
+            &.is-active {
+                pointer-events: none;
 
-				&:after {
-					border-color: var(--game-card-border-color-active);
-				}
+                span,
+                img {
+                    visibility: visible;
+                }
 
-				&.is-match {
-					span,
-					&:after {
-						border-color: var(--game-card-border-color-match);
-					}
-				}
-	
-				&.is-not-match {
-					span,
-					&:after {
-						border-color: var(--color-warning);
-					}
-				}
-			}
+                &::after {
+                    border-color: var(--game-card-border-color-active);
+                }
 
-			&.is-open {
-				span,
-				&:after {
-					visibility: visible;
-					border-color: transparent;
-				}
-			}
+                &.is-match {
+                    span,
+                    &::after {
+                        border-color: var(--game-card-border-color-match);
+                    }
+                }
 
-			&:not(.is-open, .is-active) {
-				background: var(--game-card-backface);
+                &.is-not-match {
+                    span,
+                    &::after {
+                        border-color: var(--color-warning);
+                    }
+                }
+            }
 
-				span,
-				img {
-					visibility: hidden;
-				}
-			}
+            &.is-open {
+                span,
+                &::after {
+                    visibility: visible;
+                    border-color: transparent;
+                }
+            }
 
-			&:not(.is-open, .is-active):hover {
-				box-shadow: $shadow-hover;
-			}
+            &:not(.is-open, .is-active) {
+                background: var(--game-card-backface);
 
-			// TEMP
-			// &:hover {
-			// 	span {
-			// 		visibility: visible;
-			// 		border-color: transparent;
-			// 	}
-			// }
-			// TEMP
+                span,
+                img {
+                    visibility: hidden;
+                }
+            }
 
-			&-type-1 {
-				background: #F6F3F2;
-			}
-			&-type-2 {
-				background: #F4F5F7;
-			}
-			&-type-3 {
-				background: #F4F5F7;
-			}
-			&-type-4 {
-				background: #F4F5F1;
-			}
-			&-type-5 {
-				background: #F6F3F1;
-			}
-			&-type-6 {
-				background: #F3F3F9;
-			}
-			&-type-7 {
-				background: #F5F2EB;
-			}
-			&-type-8 {
-				background: #EEEFEC;
-			}
-		}
-	}
+            &:not(.is-open, .is-active):hover {
+                box-shadow: $shadow-hover;
+            }
+
+            // TEMP
+            // &:hover {
+            // 	span {
+            // 		visibility: visible;
+            // 		border-color: transparent;
+            // 	}
+            // }
+            // TEMP
+
+            &-type-1 {
+                background: #f6f3f2;
+            }
+
+            &-type-2 {
+                background: #f4f5f7;
+            }
+
+            &-type-3 {
+                background: #f4f5f7;
+            }
+
+            &-type-4 {
+                background: #f4f5f1;
+            }
+
+            &-type-5 {
+                background: #f6f3f1;
+            }
+
+            &-type-6 {
+                background: #f3f3f9;
+            }
+
+            &-type-7 {
+                background: #f5f2eb;
+            }
+
+            &-type-8 {
+                background: #eeefec;
+            }
+        }
+    }
 }
 
 .memo-modal {
