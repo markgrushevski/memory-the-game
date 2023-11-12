@@ -233,7 +233,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
 
     <section v-if="showEndGameModal" class="memo-modal memo-modal-end">
         <div class="memo-modal__container">
-            <div class="memo-modal__header">Игра окнчена</div>
+            <div class="memo-modal__header">Игра окончена</div>
             <div class="memo-modal__content">
                 <h3>Поздравлем!</h3>
                 <p>Вы открыли все карточки!</p>
@@ -313,6 +313,10 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
             </div>
         </div>
         <div class="memo-modal__overlay" @click.self="closeAllModals"></div>
+    </section>
+
+    <section class="follow">
+        <div class="yashare-auto-init" data-yasharedescription="" data-yashareimage="" data-yasharelink="" data-yasharequickservices="yaru,vkontakte,facebook,twitter,odnoklassniki,moimir,gplus" data-yasharetheme="counter" data-yasharetitle="" data-yasharetype="big">&nbsp;</div>
     </section>
 </template>
 
