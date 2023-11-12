@@ -1,15 +1,15 @@
 :root {
-	--page-container: 1152px;
+	--page-container: 912px;
 	--page-content: 800px;
 	
-	--page-background: #F5F3DD;
-	--layout-background: #ffffff;
-	--color-primary: #2E1A05;
+	--page-background: #EFE1CB;
+	--layout-background: #FEFDFA;
+	--color-primary: #3F2E2B;
 	--color-secondary: #6e6e6e;
 	--color-mute: #b1b1b1;
 	--color-accent: #8FC8C7;
 	--color-warning: #E75E50;
-	--color-border: #e1e1e1;
+	--color-border: #EED7B3;
 	--button-background: #ff0000;
 	--button-color: #ffffff;
 	
@@ -24,10 +24,10 @@
 	--element-border-radius: 4px;
 
 	// Game Field
-	--game-cards: 10;
+	--game-cards: 8;
 	--game-card-border-width: 4px;
-	--game-card-backface: #EAE6B9;
-	--game-card-border-color: #EAE6B9;
+	--game-card-backface: #F3E8D6;
+	--game-card-border-color: #F3E8D6;
 	--game-card-border-color-match: #919B1C;
 }
 
