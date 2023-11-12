@@ -54,6 +54,7 @@
 
 	svg {
 		transition: $transition;
+		fill: var(--color-primary);
 	}
 }
 
@@ -61,4 +62,10 @@
 	svg {
 		fill: var(--color-accent);
 	}
+}
+
+@mixin font-headings() {
+	font-family: var(--font-family-headings);
+	font-weight: var(--font-weight-headings);
+	line-height: var(--line-height-headings);
 }
