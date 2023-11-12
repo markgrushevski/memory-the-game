@@ -322,7 +322,7 @@ dl {
 }
 
 .memo-modal {
-	//display: none;
+	display: none;
 	position: fixed;
 	top: 0;
 	bottom: 0;
@@ -333,11 +333,22 @@ dl {
 	align-items: center;
 
 	&-start {
-		display: flex;
+		display: none;
 	}
 
 	&-end {
 		display: none;
+	}
+
+	&-help {
+		.memo-modal__content {
+			justify-content: flex-start;
+			align-items: flex-start;
+		}
+	}
+
+	&.is-active {
+		display: flex;
 	}
 
 	&__overlay {
