@@ -339,8 +339,6 @@ input, select {
 	align-items: center;
 
 	&-start {
-		display: flex;
-
 		.start-new-game-form {
 			display: flex;
 			flex-direction: column;
@@ -362,7 +360,7 @@ input, select {
 	}
 
 	&-end {
-		display: none;
+
 	}
 
 	&-help {
