@@ -33,3 +33,6 @@
 
 ## Ссылка на деплой
 [Ссылка на развернутый проект, если доступен]
+
+## Ссылка на проект в Figma
+https://www.figma.com/file/4KsvT2mvKPWwtnhc4gKgLI/Jun-Hackathon?type=design&node-id=0%3A1&mode=design&t=ERF1T4H8JQBiZWUN-1
