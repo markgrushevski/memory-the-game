@@ -1,14 +1,15 @@
-import { useAppFetch } from '@lib';
+import { useAppFetch } from '@shared/lib';
+import type { Card, Quantity } from '@shared/types';
 import { defineStore } from 'pinia';
 import { ref } from 'vue';
 
 export const useCardsStore = defineStore('cards', () => {
-    const cards = ref(/** @type {import('@/main').Card[]} */ ([]));
+    const cards = ref<Card[]>([]);
 
-    const cardsQuantity = ref(/** @type {import('@/main').Quantity} */ (16));
+    const cardsQuantity = ref<Quantity>(16);
 
-    function fetchCards() {
-        useAppFetch(`/shuffledCards/${cardsQuantity.value}/?format=json`)
+    async function fetchCards() {
+        await useAppFetch(`/shuffledCards/${cardsQuantity.value}/?format=json`)
             .get()
             .json()
             .then(({ data }) => {
@@ -23,6 +24,7 @@ export const useCardsStore = defineStore('cards', () => {
     }
 
     function $reset() {
+        cards.value = [];
         cardsQuantity.value = 16;
     }
 

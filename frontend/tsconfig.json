@@ -1,0 +1,28 @@
+{
+    "include": ["src"],
+    "compilerOptions": {
+        "rootDir": ".",
+        "noEmit": true,
+        "strict": true,
+        "module": "esnext",
+        "target": "esnext",
+        "skipLibCheck": true,
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "verbatimModuleSyntax": true,
+        "allowImportingTsExtensions": true,
+        "allowSyntheticDefaultImports": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "bundler",
+        "lib": ["DOM", "DOM.Iterable", "ESNext"],
+        "types": ["vite/client"],
+        "baseUrl": ".",
+        "incremental": true,
+        "composite": true,
+        "paths": {
+            "@app": ["./src/app"],
+            "@components": ["./src/components"],
+            "@shared/*": ["./src/shared/*"]
+        }
+    }
+}

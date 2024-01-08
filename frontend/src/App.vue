@@ -1,12 +1,17 @@
-<script setup>
-import { useCardsStore, useGameStore, useHistoryStore, usePlayersStore } from '@store';
-import { useDateFormat } from '@vueuse/core';
-import { computed, ref, watch } from 'vue';
+<script setup lang="ts">
+import { useCardsStore, useGameStore, useHistoryStore, usePlayersStore } from '@shared/stores';
+import type { Card, Difficulty, Quantity } from '@shared/types';
+import { useDateFormat, useFetch } from '@vueuse/core';
+import { computed, ref } from 'vue';
 
 const gameStore = useGameStore();
 const historyStore = useHistoryStore();
 const playersStore = usePlayersStore();
 const cardsStore = useCardsStore();
+
+const time = useDateFormat(() => gameStore.gameTimeInMS, 'mm:ss');
+
+const isFieldDisabled = ref(true);
 
 const showNewGameModal = ref(true);
 const showEndGameModal = ref(false);
@@ -18,51 +23,85 @@ function closeAllModals() {
     showHelpModal.value = false;
 }
 
-const time = useDateFormat(gameStore.gameTime, 'mm:ss');
-
 const playerName = ref('');
-const playerDifficulty = ref('easy');
-const playerQuantity = ref(16);
+const playerDifficulty = ref<Difficulty>('easy');
+const playerQuantity = ref<Quantity>(16);
 
-const openedCards = ref(/** @type {import('@/main').Card[]} */ []);
-const selectedCards = ref(/** @type {[import('@/main').Card, import('@/main').Card]} */ ([]));
+/** All matched cards per game */
+const matchedCardsPerGame = ref<Card[]>([]);
+/** The maximum length is 2  */
+const selectedCardsPerTurn = ref<Card[]>([]);
 
-const checkIsMatch = computed(() => selectedCards.value[0].id === selectedCards.value[1].id);
+const isSelectedCardsPerTurnMatch = computed(() => {
+    if (!selectedCardsPerTurn.value?.[0]) return false;
+    return selectedCardsPerTurn.value?.[0]?.id === selectedCardsPerTurn.value?.[1]?.id;
+});
 
-const getImagePath = computed(() => (url) => new URL(`./ui/img/${url}`, import.meta.url).href);
+function selectCard(card: Card) {
+    if (isFieldDisabled.value) return;
 
-const field = ref(/** @type {HTMLElement | null} */ (null));
+    const idleTimeInMS = 250;
+    const cardsCount = selectedCardsPerTurn.value.length;
 
-watch(
-    () => selectedCards.value,
-    () => {
-        if (selectedCards.value.length === 2) {
-            field.value.style.pointerEvents = 'none';
+    switch (cardsCount) {
+        case 0:
+            isFieldDisabled.value = true;
+
+            selectedCardsPerTurn.value[0] = card;
+
+            isFieldDisabled.value = false;
+
+            break;
+        case 1:
+            isFieldDisabled.value = true;
+
+            selectedCardsPerTurn.value[1] = card;
 
             historyStore.makeHistoryStep(
-                checkIsMatch.value,
+                isSelectedCardsPerTurnMatch.value,
                 playersStore.currentPlayers[playersStore.turnIndex],
-                selectedCards.value
+                selectedCardsPerTurn.value
             );
 
-            if (checkIsMatch.value) {
-                openedCards.value.push(selectedCards.value[0]);
-                openedCards.value.push(selectedCards.value[1]);
+            if (isSelectedCardsPerTurnMatch.value) {
+                matchedCardsPerGame.value.push(selectedCardsPerTurn.value[0], selectedCardsPerTurn.value[1]);
+
+                playersStore.addScoreToCurrentPlayer(gameStore.selectedDifficulty, cardsStore.cardsQuantity);
+
+                if (cardsStore.cards.length === matchedCardsPerGame.value.length) {
+                    gameStore.createGame();
+                    showEndGameModal.value = true;
+                }
             }
 
             setTimeout(() => {
-                selectedCards.value.length = 0;
-                field.value.style.pointerEvents = 'auto';
-            }, 1000);
-        }
+                selectedCardsPerTurn.value.length = 0;
+                isFieldDisabled.value = false;
+            }, idleTimeInMS);
 
-        if (cardsStore.cards.length === openedCards.value.length) {
-            gameStore.createGame();
-            showEndGameModal.value = true;
-        }
-    },
-    { deep: true }
-);
+            break;
+        default:
+            console.error('selectedCardsPerTurn: ', selectedCardsPerTurn.value);
+
+            // todo доделать обработку ошибки
+            if (cardsCount > 2) {
+                console.error('selected cards per a turn exceeded 2\n');
+                selectedCardsPerTurn.value.length = 2;
+                return;
+            }
+    }
+}
+
+function startGame() {
+    matchedCardsPerGame.value = [];
+    selectedCardsPerTurn.value = [];
+
+    gameStore.initGame([playerName.value], playerDifficulty.value, playerQuantity.value);
+
+    showNewGameModal.value = false;
+
+    isFieldDisabled.value = false;
+}
 
 /* useFetch('https://django-api-eodw.onrender.com/api/items/3/')
     .put(JSON.stringify({ name: 'PUT', description: 'меняю третий' }), 'application/json')
@@ -71,11 +110,52 @@ watch(
         console.log(data.value);
     });
 
-useFetch('https://django-api-eodw.onrender.com/api/items/2')
+useFetch('https://django-api-eodw.onrender.com/api/items/2/')
     .delete()
     .json()
     .then(({ data }) => {
         console.log(data.value);
+    }); */
+let token = '205937ddb5e834d2ddac2e97abd99001f0f8f817';
+
+/* useFetch('https://memory-27.onrender.com/api/users/')
+    .get()
+    .json()
+    .then(({ data }) => {
+        console.group('api/users/');
+        console.log('get users');
+        console.log(data.value);
+        console.groupEnd();
+    }); */
+
+/* useFetch('https://memory-27.onrender.com/api/auth/users/')
+    .post({ email: '', username: 'Max', password: 'Очень!Сложный!Пароль!' })
+    .json()
+    .then(({ data }) => {
+        console.group('api/auth/users/');
+        console.log('register');
+        console.log(data.value);
+        console.groupEnd();
+    }); */
+
+/* useFetch('https://memory-27.onrender.com/auth/token/login/')
+    .post({ username: 'Max', password: 'Очень!Сложный!Пароль!' })
+    .json()
+    .then(({ data }) => {
+        console.group('auth/token/login/');
+        console.log('login');
+        console.log(data.value);
+        console.groupEnd();
+    }); */
+
+/* useFetch('https://memory-27.onrender.com/auth/token/logout/', { headers: { Authorization: `Bearer ${token}` } })
+    .post({ username: 'Max', password: 'Очень!Сложный!Пароль!' })
+    .json()
+    .then(({ data }) => {
+        console.group('auth/token/logout/');
+        console.log('logout');
+        console.log(data.value);
+        console.groupEnd();
     }); */
 </script>
 
@@ -141,7 +221,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                     <div class="memo-score__players">
                         <div
                             v-for="player in playersStore.currentPlayers"
-                            :key="player"
+                            :key="player.id"
                             class="memo-score__players-player"
                             :class="{ 'is-active': playersStore.currentPlayers[playersStore.turnIndex] === player }"
                         >
@@ -158,11 +238,11 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                                 d="M12,6a1,1,0,0,0-1,1v4.325L7.629,13.437a1,1,0,0,0,1.062,1.7l3.84-2.4A1,1,0,0,0,13,11.879V7A1,1,0,0,0,12,6Z"
                             />
                         </svg>
-                        <span v-if="false">{{ time }}</span>
+                        <span v-if="true">{{ time }}</span>
                     </div>
                 </div>
                 <main>
-                    <div ref="field" class="memo-board">
+                    <div class="memo-board" :class="{ 'memo-board_disabled': isFieldDisabled }">
                         <div class="memo-board-inner">
                             <div
                                 v-for="card in cardsStore.cards"
@@ -170,18 +250,14 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                                 :key="card.cardId"
                                 class="memo-board__card memo-board__card-type-1"
                                 :class="{
-                                    'is-active': selectedCards.find((_card) => _card.cardId === card.cardId),
-                                    'is-match': selectedCards.length === 2 && checkIsMatch,
-                                    'is-not-match': selectedCards.length === 2 && !checkIsMatch,
-                                    'is-open': openedCards.find((_card) => _card.cardId === card.cardId)
+                                    'is-open': matchedCardsPerGame.find((_card) => _card.cardId === card.cardId),
+                                    'is-active': selectedCardsPerTurn.find((_card) => _card.cardId === card.cardId),
+                                    'is-match': selectedCardsPerTurn.length === 2 && isSelectedCardsPerTurnMatch,
+                                    'is-not-match': selectedCardsPerTurn.length === 2 && !isSelectedCardsPerTurnMatch
                                 }"
-                                @click="
-                                    () => {
-                                        selectedCards.push(card);
-                                    }
-                                "
+                                @click="selectCard(card)"
                             >
-                                <img :src="getImagePath(card.url)" alt="" />
+                                <img :src="`/${card.url}`" alt="" />
                             </div>
                         </div>
                     </div>
@@ -194,13 +270,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
         <div class="memo-modal__container">
             <div class="memo-modal__header">Начать новую игру</div>
             <div class="memo-modal__content">
-                <form
-                    class="start-new-game-form"
-                    @submit.prevent="
-                        gameStore.initGame([playerName], playerDifficulty, playerQuantity);
-                        showNewGameModal = false;
-                    "
-                >
+                <form class="start-new-game-form" @submit.prevent="startGame">
                     <label for="name">Имя:</label>
                     <input v-model="playerName" required class="memo__input" type="text" name="name" />
 
@@ -239,7 +309,7 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
         <div class="memo-modal__overlay" @click.self="closeAllModals"></div>
     </section>
 
-    <section v-if="showEndGameModal" class="memo-modal memo-modal-end">
+    <section v-if="showEndGameModal || gameStore.isTimeOut" class="memo-modal memo-modal-end">
         <div class="memo-modal__container">
             <div class="memo-modal__header">Игра окончена</div>
             <div class="memo-modal__content">
@@ -250,8 +320,11 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
                     aria-label="Начать новую игру"
                     title="Начать новую игру"
                     @click="
-                        closeAllModals();
-                        showNewGameModal = true;
+                        () => {
+                            closeAllModals();
+                            gameStore.isTimeOut = false;
+                            showNewGameModal = true;
+                        }
                     "
                 >
                     Попробовать еще раз
@@ -327,11 +400,26 @@ useFetch('https://django-api-eodw.onrender.com/api/items/2')
         <div class="memo-modal__overlay" @click.self="closeAllModals"></div>
     </section>
 
-    <section class="follow">
-        <div class="yashare-auto-init" data-yasharedescription="" data-yashareimage="" data-yasharelink="" data-yasharequickservices="yaru,vkontakte,facebook,twitter,odnoklassniki,moimir,gplus" data-yasharetheme="counter" data-yasharetitle="" data-yasharetype="big">&nbsp;</div>
+    <section v-if="false" class="follow">
+        <div
+            class="yashare-auto-init"
+            data-yasharedescription=""
+            data-yashareimage=""
+            data-yasharelink=""
+            data-yasharequickservices="yaru,vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"
+            data-yasharetheme="counter"
+            data-yasharetitle=""
+            data-yasharetype="big"
+        >
+            &nbsp;
+        </div>
     </section>
 </template>
 
 <style lang="scss">
-@import url('./ui/styles.scss');
+@import '@shared/ui/styles';
+
+.memo-board_disabled {
+    pointer-events: none;
+}
 </style>
